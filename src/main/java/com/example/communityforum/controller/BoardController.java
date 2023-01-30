@@ -8,7 +8,6 @@ public class BoardController {
 
     @GetMapping("/","/home")
     String home() {
-
         return "home";
     }
 }
