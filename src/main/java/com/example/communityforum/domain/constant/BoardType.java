@@ -1,5 +1,5 @@
 package com.example.communityforum.domain.constant;
 
-public enum Category {
+public enum BoardType {
     NOTICE, FORUM
 }
