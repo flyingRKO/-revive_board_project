@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default-layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+</head>
+<th:block layout:fragment="content">
+<div>공지공지</div>
+<form th:action="@{/board/noticeBoardFormProcess}" method="post">
+    <input type="hidden" name="boardSeq"/>
+
+    <div class="mb-3">
+        <label for="title" class="form-label">제목:</label>
+        <input type="text" class="form-control"
+               name="title" id="title"
+               placeholder="게시글의 제목">
+    </div>
+    <div class="mb-3">
+        <label for="contents" class="form-label">내용:</label>
+        <textarea class="form-control"
+                  name="contents"
+                  id="contents"
+                  rows="3"></textarea>
+    </div>
+    <div>
+
+    </div>
+    <button type="submit" class="btn btn-primary">등록하기</button>
+    <div><br></div>
+</form>
+</th:block>
+</html>

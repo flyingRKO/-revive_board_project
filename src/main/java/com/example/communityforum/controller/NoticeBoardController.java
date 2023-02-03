@@ -9,23 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class BoardController {
+public class NoticeBoardController {
     private final BoardService boardService;
-    @GetMapping("/home")
-    String home() {
-        return "home";
-    }
 
-    @GetMapping("/board/boardForm")
-    public String BoardWriteForm() {
+    @GetMapping("/board/noticeBoardForm")
+    public String noticeBoardWriteForm() {
         System.out.println("호출@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        return "/board/boardForm";
+        return "board/noticeBoardForm";
     }
 
-    @PostMapping("/board/boardFormProcess")
-    public String insertBoard(Board board) {
+    @PostMapping("/board/noticeBoardFormProcess")
+    public String insertNoticeBoard(Board board) {
         System.out.println("제목: "+ board.getTitle());
         boardService.boardWrite(board);
-        return "noticeBoardList";
+        return "/board/noticeBoardList";
     }
 }
