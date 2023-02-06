@@ -29,7 +29,7 @@ public class JpaRepositoryTest {
                 .userId(2)
                 .title("abcde")
                 .content("contents")
-                .category(FaqType.ETC)
+                .type(FaqType.ETC)
                 .registeredDate(LocalDateTime.now()).build();
 
         faqRepository.save(faq);
