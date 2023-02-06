@@ -29,8 +29,11 @@ public class SecurityConfig {
                                 "/notice",
                                 "/forum",
                                 "/faq",
-                                "/member/login",
-                                "/member/join"
+                                "/member/**"
+                        ).permitAll()
+                        .mvcMatchers(
+                                HttpMethod.POST,
+                                "/member/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
