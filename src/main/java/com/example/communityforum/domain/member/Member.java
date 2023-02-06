@@ -1,7 +1,6 @@
-package com.example.communityforum.domain;
+package com.example.communityforum.domain.member;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -22,9 +21,9 @@ public class Member {
     @Column(length = 11, nullable = false)
     private String phone;
 
-    @Column(columnDefinition = "ENUM('ADMIN', 'GENERAL')")
+    @Column(columnDefinition = "ENUM('ADMIN', 'USER')")
     @Enumerated(EnumType.STRING)
-    private MemberRole role = MemberRole.GENERAL;
+    private MemberRole role = MemberRole.USER;
 
     @Column(name = "term", nullable = false)
     private Boolean agreedTerms;
@@ -39,8 +38,21 @@ public class Member {
         this.agreedTerms = agreedTerms;
     }
 
+    public Member(String memberId, String memberPassword, String name, String phone, MemberRole role, Boolean agreedTerms) {
+        this.memberId = memberId;
+        this.memberPassword = memberPassword;
+        this.name = name;
+        this.phone = phone;
+        this.role = role;
+        this.agreedTerms = agreedTerms;
+    }
+
     public static Member of(String memberId, String memberPassword, String name, String phone, Boolean agreedTerms) {
         return new Member(memberId, memberPassword, name, phone, agreedTerms);
+    }
+
+    public static Member of(String memberId, String memberPassword, String name, String phone, MemberRole role, Boolean agreedTerms) {
+        return new Member(memberId, memberPassword, name, phone, role, agreedTerms);
     }
 
     @Override
