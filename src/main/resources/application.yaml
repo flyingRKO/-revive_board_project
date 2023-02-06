@@ -1,7 +1,22 @@
 spring:
-  # ?????? ???? ??
   datasource:
-    username: root
-    password: 1234
-    url: jdbc:mariadb://localhost:3307/profile
-    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/board
+    username: chan
+    password: chan
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+  sql:
+    init:
+      mode: always
+
+  thymeleaf3:
+    decoupled-logic: true
