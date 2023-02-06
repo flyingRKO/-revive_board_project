@@ -9,8 +9,11 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-  <script type="text/javascript"></script>
+  <link href="/css/member.css" rel="stylesheet">
+  <script src="/js/member.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
 <header id="header">
   헤더 삽입부
@@ -28,7 +31,10 @@
     <div class="mb-3">
       <label for="memberId" class="form-label">사용자ID</label>
       <input id="memberId" type="text" th:field="*{memberId}" class="form-control">
-      <button type="button" class="btn btn-primary btn-sm" onclick="registerCheck()">중복체크</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="checkId()">중복체크</button>
+      <span class="id_ok">사용 가능한 아이디입니다.</span>
+      <span class="id_invalid">잘못된 형식 입니다.</span>
+      <span class="id_already">이미 사용중인 아이디입니다.</span>
     </div>
     <div class="mb-3">
       <label for="memberPassword" class="form-label">비밀번호</label>
