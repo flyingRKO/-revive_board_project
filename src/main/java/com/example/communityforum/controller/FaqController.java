@@ -7,17 +7,21 @@ import com.example.communityforum.repository.FaqRepository;
 import com.example.communityforum.service.FaqService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,14 +30,26 @@ public class FaqController {
 
     private final FaqService faqService;
     private final FaqRepository faqRepository;
-    @GetMapping
+    @GetMapping(value = {"", "/{faqType}"})
     String list(
             @PageableDefault(size = 10, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
-            ModelMap map){
-        Page<Faq> faqs = faqService.listAll(pageable);
+            ModelMap map,
+            @PathVariable(required = false) Integer faqType){
 
+        Page<Faq> faqs = faqService.findAllByType(pageable, faqType);
+
+        map.addAttribute("faqType", faqType);
         map.addAttribute("faqList", faqs);
         return "faq/list";
+    }
+
+    @PostMapping("/type")
+    public String listByType(@PageableDefault(size = 10, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
+                             ModelMap map, @RequestParam int faqType) {
+        Page<Faq> faqs = faqService.findAllByType(pageable, faqType);
+        map.addAttribute("faqList", faqs);
+
+        return "faq/list-by-type";
     }
 
     @GetMapping("/register")
@@ -44,7 +60,7 @@ public class FaqController {
 
     @PostMapping("/register")
     public String save(@Validated FaqRegisterForm form) {
-        // form -> Board 도메인으로 데이터 set 후 build
+        // form -> Faq 도메인으로 데이터 set 후 build
         Faq faq = Faq.builder()
                 .type(FaqType.values()[Integer.parseInt(form.getType())])
                 .title(form.getTitle())
