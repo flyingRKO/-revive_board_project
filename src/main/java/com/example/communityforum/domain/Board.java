@@ -25,6 +25,8 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter @ManyToOne(optional = false) private UserAccount userAccount; // 유저 정보
+
     @Setter
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -34,7 +36,7 @@ public class Board {
     @Setter @Column(nullable = false, length = 500) private String content;  // 본문
 
 
-    @OrderBy("id")
+    @OrderBy("registeredDate desc")
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     @ToString.Exclude
     private final Set<BoardComment> boardComments = new LinkedHashSet<>();
@@ -46,14 +48,15 @@ public class Board {
 
     protected Board() {}
 
-    private Board(BoardType boardType, String title, String content) {
+    private Board(UserAccount userAccount, BoardType boardType, String title, String content) {
+        this.userAccount = userAccount;
         this.boardType = boardType;
         this.title = title;
         this.content = content;
     }
 
-    public static Board of(BoardType boardType, String title, String content) {
-        return new Board(boardType, title, content);
+    public static Board of(UserAccount userAccount, BoardType boardType, String title, String content) {
+        return new Board(userAccount, boardType, title, content);
     }
 
     @Override
