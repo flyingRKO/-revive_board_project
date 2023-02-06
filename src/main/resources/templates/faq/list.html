@@ -48,13 +48,41 @@
                     <li class="nav-item">
                         <button class="nav-link" id = "nav-item-inquiry" onclick="tab_click(id)" href="#">이용문의</button>
                     </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id = "nav-item-etc" onclick="tab_click(id)" href="#">기타문의</button>
+                    </li>
 
                 </ul>
             </div >
 
             <!-- 게시글 목록 영역 -->
             <div class="list-article">
-                <div class="list-article-section"></div>
+                <div class="list-article-section">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">카테고리</th>
+                                <th scope="col">제목</th>
+                                <th scope="col">내용</th>
+                                <th scope="col">등록일</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="faq, faqState : ${faqList}">
+                                <th scope="row">[[${faqState.index+1}]]</th>
+                                <td>[[${faq.type.description}]]</td>
+                                <td>[[${faq.title}]]</td>
+                                <td>[[${faq.content}]]</td>
+                                <td>[[${faq.registeredDate}]]</td>
+                            </tr>
+                            <!-- 게시물 데이터가 없는경우 -->
+                            <tr th:if="${faqList.getTotalElements() == 0}">
+                                <td colspan="3">게시물이 존재하지 않습니다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
