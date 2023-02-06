@@ -12,10 +12,8 @@ public class Member {
     @Id
     @Column(length = 10)
     private String memberId;
-
-    @Column(length = 15, nullable = false)
+    @Column(length = 60, nullable = false)
     private String memberPassword;
-
     @Column(length = 10, nullable = false)
     private String name;
     @Column(length = 11, nullable = false)
