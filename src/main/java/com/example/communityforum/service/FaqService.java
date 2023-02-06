@@ -9,20 +9,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class FaqService {
 
     private final FaqRepository faqRepository;
-
-    public Page<Faq> findAllByType(Pageable pageable, Integer type){
-        if (type == null) {
-            return faqRepository.findAll(pageable);
-        }
-
-        return faqRepository.findAllByType(FaqType.values()[type], pageable);
+    public Page<Faq> listAll(Pageable pageable){
+        return faqRepository.findAll(pageable);
     }
 
     public void save(Faq faq) {
