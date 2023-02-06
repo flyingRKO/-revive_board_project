@@ -38,13 +38,14 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin()
-                .loginPage("/member/login").defaultSuccessUrl("/")
+                .loginPage("/member/login").defaultSuccessUrl("/?loginSuccess=true")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .and()
+                .csrf().disable()
                 .build();
     }
 

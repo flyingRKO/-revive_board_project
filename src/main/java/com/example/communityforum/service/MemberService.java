@@ -34,4 +34,12 @@ public class MemberService {
         memberRepository.save(member);
         return member;
     }
+
+    public int idCheck(String memberId) {
+        Member findMember = memberRepository.findByMemberId(memberId).orElse(null);
+        if (findMember != null) {
+            return 1;
+        }
+        return 0;
+    }
 }
