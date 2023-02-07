@@ -39,9 +39,9 @@
 
             </textarea>
         </div>
-<!--        <button type="submit" class="btn btn-primary" onclick="register_faq();">등록하기</button>-->
-        <button type="submit" class="btn btn-primary">저장</button>
-        <button type="button" th:onclick="'history.back()'"  class="btn btn-primary">취소</button>
+
+        <button type="submit" class="btn btn-primary" th:onclick="register_faq()" >저장</button>
+        <button type="button" th:onclick="'history.back();'"  class="btn btn-primary">취소</button>
     </form>
 
 
@@ -69,22 +69,6 @@
 
         function register_faq(){
             alert("저장되었습니다.");
-
-            $.ajax({
-                url: '/faq/register',
-                type: 'post',
-                data: {
-                    faq_type: selected_type,
-                    title: document.getElementById("title").value,
-                    content: document.getElementById("contents").value
-                },
-
-                error: function(data) {
-                    console.log(data);
-                    alert('오류가 발생하였습니다.');
-                }
-            });
-
         }
     </script>
 </th:block>
