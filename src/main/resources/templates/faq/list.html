@@ -66,68 +66,28 @@
             <!-- 게시글 목록 영역 -->
             <div class="list-article">
                 <div class="list-article-section" id = "FaqListContentByType">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">카테고리</th>
-                                <th scope="col">제목</th>
-                                <th scope="col">내용</th>
-                                <th scope="col">등록일</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:each="faq, faqState : ${faqList}">
-                                <th scope="row">[[${faqState.index+1}]]</th>
-                                <td>[[${faq.type.description}]]</td>
-                                <td>[[${faq.title}]]</td>
-                                <td>[[${faq.content}]]</td>
-                                <td>[[${faq.registeredDate}]]</td>
-                            </tr>
-                            <!-- 게시물 데이터가 없는경우 -->
-                            <tr th:if="${faqList.getTotalElements() == 0}">
-                                <td colspan="3">게시물이 존재하지 않습니다.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <tr th:each="faq, faqState: ${faqList}">
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                            th:onclick="accordion_click(this)">
+                                        <span th:text="'[' + ${faq.type.description} + ']       '"></span>
+                                        <span th:text="${faq.title}"></span>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        [[${faq.content}]]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
                 </div>
+
             </div>
         </div>
-
-        <!--[결제/취소], [이용문의]-->
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" id = "panelsStayOpen-headingOne-accordion" onclick="accordion_click(id)"
-                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        [결제/취소] 결제는 어떻게 하는건가요?
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                        결제는 주문하고 싶은 상품을 검색하신 후
-                        상품 상세페이지에서 주문하기를 누르세요.
-                        신용카드/간편결제/휴대폰결제/계좌이체 중에
-                        편하신 방법으로 선택해서 결제를 완료해주시면 됩니다.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" id = "panelsStayOpen-headingTwo-accordion" onclick="accordion_click(id)"
-                            data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        [이용문의] 회원가입을 어떻게 하는건가요?
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                        <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 </th:block>
 
@@ -169,15 +129,15 @@
 
         }
 
-        function accordion_click(id){
-            var elem = document.getElementById(id);
-            if(elem.classList.contains("collapsed"))
-                elem.classList.remove("collapsed");
+        function accordion_click(accordion){
+
+            if(accordion.classList.contains("collapsed"))
+                accordion.classList.remove("collapsed");
             else
-                elem.classList.add("collapsed");
+                accordion.classList.add("collapsed");
 
             // 부모 : parentNode
-            const parentElem = elem.parentElement;
+            const parentElem = accordion.parentElement;
             if(parentElem.nextElementSibling.classList.contains("show"))
                 parentElem.nextElementSibling.classList.remove("show");
             else
