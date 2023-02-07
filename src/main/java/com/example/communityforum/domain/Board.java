@@ -17,7 +17,10 @@ import java.util.Set;
 
 @Getter
 @ToString
-@Table
+@Table(indexes = {
+        @Index(columnList = "title"),
+        @Index(columnList = "registeredDate")
+        })
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class Board {
@@ -25,7 +28,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false) private UserAccount userAccount; // 유저 정보
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보
 
     @Setter
     @Column(nullable = false)
