@@ -12,7 +12,10 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@Table
+@Table(indexes = {
+        @Index(columnList = "content"),
+        @Index(columnList = "registeredDate")
+})
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class BoardComment {
@@ -21,7 +24,7 @@ public class BoardComment {
     private Long id;
 
     @Setter @ManyToOne(optional = false) private Board board; // 게시글 (ID)
-    @Setter @ManyToOne(optional = false) private UserAccount userAccount; // 유저 정보
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보
     @Setter @Column(nullable = false, length = 50) private String content; // 본문
     @CreatedDate @Column(nullable = false) private LocalDateTime registeredDate; // 생성일시
 
