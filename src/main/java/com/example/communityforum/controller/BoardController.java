@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardService boardService;
+
     @GetMapping("/home")
     String home() {
         return "home";

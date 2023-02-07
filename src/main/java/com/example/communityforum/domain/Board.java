@@ -23,6 +23,7 @@ public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter
     private Long id;
 
     @Setter
@@ -40,8 +41,13 @@ public class Board {
     private final Set<BoardComment> boardComments = new LinkedHashSet<>();
 
 
-    @CreatedDate @Column(nullable = false) private LocalDateTime registeredDate; // 생성일시
-    @LastModifiedDate @Column(nullable = false) private LocalDateTime modifiedDate; // 수정일시
+    @CreatedDate
+    @Column (nullable = true)
+    private LocalDateTime registeredDate; // 생성일시
+
+    @LastModifiedDate
+    @Column (nullable = true)
+    private LocalDateTime modifiedDate; // 수정일시
 
 
     protected Board() {}

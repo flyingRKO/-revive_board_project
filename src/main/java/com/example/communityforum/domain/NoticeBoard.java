@@ -1,4 +1,3 @@
-/*
 package com.example.communityforum.domain;
 
 import com.example.communityforum.domain.constant.BoardType;
@@ -20,8 +19,5 @@ public class NoticeBoard {
     private Long id;
     private String title; // 제목
     private String content;  // 본문
-    private BoardType category; // 구분
-    private UserAccount userAccount; // 글쓴이
-    private LocalDateTime registeredDate; // 생성일시
+
 }
-*/

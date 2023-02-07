@@ -4,25 +4,25 @@
       layout:decorate="~{layouts/default-layout}">
 <head>
     <meta charset="UTF-8">
-    <title>공지사항</title>
+    <title>수정수정</title>
 </head>
 <th:block layout:fragment="content">
-    <div>공지공지</div>
+    <div>수정수정</div>
     <form th:action="@{/board/noticeBoardFormProcess}" method="post">
-        <input type="hidden" name="boardSeq"/>
-
+        <input type="hidden" id="id" name="id" th:value="${board.id}"/>
         <div class="mb-3">
             <label for="title" class="form-label">제목:</label>
             <input type="text" class="form-control"
                    name="title" id="title"
-                   placeholder="게시글의 제목">
+                   placeholder="게시글의 제목" th:value="${board.title}">
+
         </div>
         <div class="mb-3">
             <label for="content" class="form-label">내용:</label>
             <textarea class="form-control"
                       name="content"
                       id="content"
-                      rows="3"></textarea>
+                      rows="3">[[${board.content}]]</textarea>
         </div>
         <button type="button" class="btn btn-primary" onclick="location.href='/board/noticeBoardList'" >취소</button>
         <button type="submit" class="btn btn-primary">등록하기</button>
