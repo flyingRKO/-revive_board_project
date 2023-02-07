@@ -15,6 +15,29 @@
         <div>
             <p>[[${board.content}]]</p>
         </div>
+        <div>
+            댓글리스트
+        </div>
+
+        <th:block layout:fragment="content">
+
+            <form th:action="@{/board/noticeBoardDetailComment}" method="post">
+                <input type="hidden" name="id" id="id"/>
+
+                <div class="mb-3">
+                    <label for="content" class="form-label"></label>
+                    <textarea class="form-control"
+                              name="content"
+                              id="content"
+                              rows="3"
+                              placeholder="댓글을 입력해 주세요 ">
+                    </textarea>
+                    <button type="submit" class="btn btn-primary">댓글작성</button>
+                </div>
+                <div><br></div>
+            </form>
+        </th:block>
+
     </div>
     <div class="mt-2">
         <button type="button" class="btn btn-primary" onclick="location.href='/board/noticeBoardList'">목록</button>
@@ -23,7 +46,8 @@
                 th:onclick="|location.href='@{/board/noticeBoardFormEdit/{id}(id=${board.id})}'|"
                 class="btn btn-secondary">수정</button>
 
-        <button type="button" th:onclick="|location.href='@{/board/noticeBoardDelete/{id}(id=${board.id})}'|" class="btn  btn-danger">삭제</button>
+        <button type="button" th:onclick="|location.href='@{/board/noticeBoardDelete/{id}(id=${board.id})}'|"
+                class="btn  btn-danger">삭제</button>
 
     </div>
     <div><br></div>
