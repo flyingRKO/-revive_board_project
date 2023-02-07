@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<thlogic>
+    <attr sel="#home" th:href="@{/}" />
+    <attr sel="#notice" th:href="@{/}" />
+    <attr sel="#forum" th:href="@{/}" />
+
+    <attr sel="#faq" th:href="@{/}" />
+    <attr sel="#username" sec:authorize="isAuthenticated()" sec:authentication="name" />
+    <attr sel="#login" sec:authorize="!isAuthenticated()" th:href="@{/member/login}" />
+    <attr sel="#logout" sec:authorize="isAuthenticated()" th:href="@{/member/logout}" />
+    <attr sel="#join" sec:authorize="!isAuthenticated()" th:href="@{/member/signup}" />
+
+</thlogic>
