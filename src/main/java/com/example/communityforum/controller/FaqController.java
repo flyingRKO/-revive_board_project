@@ -29,24 +29,31 @@ import java.util.Optional;
 public class FaqController {
 
     private final FaqService faqService;
-    private final FaqRepository faqRepository;
-    @GetMapping(value = {"", "/{faqType}"})
+
+    @GetMapping
     String list(
-            @PageableDefault(size = 10, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
-            ModelMap map,
-            @PathVariable(required = false) Integer faqType){
+            @PageableDefault(size = 6, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
+            ModelMap map){
 
-        Page<Faq> faqs = faqService.findAllByType(pageable, faqType);
-
-        map.addAttribute("faqType", faqType);
+        Page<Faq> faqs = faqService.findAll(pageable);
         map.addAttribute("faqList", faqs);
         return "faq/list";
     }
 
-    @PostMapping("/type")
-    public String listByType(@PageableDefault(size = 10, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
-                             ModelMap map, @RequestParam int faqType) {
-        Page<Faq> faqs = faqService.findAllByType(pageable, faqType);
+    @PostMapping
+    public String listByType(@PageableDefault(size = 6, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
+                             ModelMap map, @RequestParam String faqTypeStr) {
+
+        FaqType faqType;
+        Page<Faq> faqs;
+        try{
+            faqType = FaqType.valueOf(faqTypeStr);
+            faqs = faqService.findAllByType(pageable, faqType);
+        }
+        catch (IllegalArgumentException e){
+            faqs = faqService.findAll(pageable);
+        }
+
         map.addAttribute("faqList", faqs);
 
         return "faq/list-by-type";

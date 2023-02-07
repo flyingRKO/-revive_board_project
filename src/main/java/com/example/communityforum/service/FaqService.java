@@ -17,12 +17,12 @@ public class FaqService {
 
     private final FaqRepository faqRepository;
 
-    public Page<Faq> findAllByType(Pageable pageable, Integer type){
-        if (type == null) {
-            return faqRepository.findAll(pageable);
-        }
+    public Page<Faq> findAll(Pageable pageable){
+        return faqRepository.findAll(pageable);
+    }
 
-        return faqRepository.findAllByType(FaqType.values()[type], pageable);
+    public Page<Faq> findAllByType(Pageable pageable, FaqType type){
+        return faqRepository.findAllByType(type, pageable);
     }
 
     public void save(Faq faq) {

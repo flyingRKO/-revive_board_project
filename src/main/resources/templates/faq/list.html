@@ -13,7 +13,6 @@
             .list-article-section{
                 width: 100%;
                 height: 100%;
-                background-color: red;
             }
 
             #layout-content{
@@ -55,7 +54,7 @@
 
             <!-- 게시글 목록 영역 -->
             <div class="list-article">
-                <div class="list-article-section" id = "memberListContent">
+                <div class="list-article-section" id = "FaqListContentByType">
                     <table class="table">
                         <thead>
                             <tr>
@@ -150,17 +149,16 @@
 
             $.ajax({
                 type: "POST",
-                url: "/faq/type",
-                data :{ faqType : type },
+                url: "/faq",
+                data :{ faqTypeStr : id },
                 dataType : "text"
             })
                 .done(function (result) {
                     console.log(result);
-                    $("#memberListContent").replaceWith(result);
+                    $("#FaqListContentByType").replaceWith(result);
                 })
                 .fail(function(jqXHR) {
                     console.log(jqXHR);
-                    alert("jqXHR");
                 })
                 .always(function() {
                     console.log("요청, 응답 결과에 상관없이, 이건 항상 실행됩니다.");
