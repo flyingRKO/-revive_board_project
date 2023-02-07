@@ -13,13 +13,10 @@ import java.util.Objects;
 @Table
 @Entity
 public class UserAccount {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Setter @Column(nullable = false, length = 10) private String userId; // 로그인 아이디
-    @Setter @Column(nullable = false, length = 15) private String password; // 비밀번호
+    @Column(length = 10)
+    private String userId; // 로그인 아이디
+    @Setter @Column(nullable = false) private String password; // 비밀번호
     @Setter @Column(nullable = false, length = 10) private String userName; // 사용자 본명
     @Setter @Column(nullable = false, length = 11) private String phone; // 휴대전화번호
 
@@ -50,11 +47,11 @@ public class UserAccount {
         if (this == o) return true;
         if (!(o instanceof UserAccount)) return false;
         UserAccount userAccount = (UserAccount) o;
-        return id != null && id.equals(userAccount.id);
+        return userId != null && userId.equals(userAccount.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(userId);
     }
 }
