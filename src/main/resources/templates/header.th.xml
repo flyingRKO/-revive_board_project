@@ -4,7 +4,7 @@
     <attr sel="#notice" th:href="@{/}" />
     <attr sel="#forum" th:href="@{/}" />
 
-    <attr sel="#faq" th:href="@{/}" />
+    <attr sel="#faq" th:href="@{/faq}" />
     <attr sel="#username" sec:authorize="isAuthenticated()" sec:authentication="name" />
     <attr sel="#login" sec:authorize="!isAuthenticated()" th:href="@{/member/login}" />
     <attr sel="#logout" sec:authorize="isAuthenticated()" th:href="@{/member/logout}" />

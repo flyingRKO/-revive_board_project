@@ -2,26 +2,21 @@ package com.example.communityforum.controller;
 
 import com.example.communityforum.domain.Faq;
 import com.example.communityforum.domain.constants.FaqType;
-import com.example.communityforum.form.FaqRegisterForm;
-import com.example.communityforum.repository.FaqRepository;
+import com.example.communityforum.dto.FaqRegisterForm;
 import com.example.communityforum.service.FaqService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -66,18 +61,25 @@ public class FaqController {
     }
 
     @PostMapping("/register")
-    public String save(@Validated FaqRegisterForm form) {
-        // form -> Faq 도메인으로 데이터 set 후 build
-        Faq faq = Faq.builder()
-                .type(FaqType.values()[Integer.parseInt(form.getType())])
-                .title(form.getTitle())
-                .content(form.getContent())
-                .registeredDate(LocalDateTime.now())
-                .build();
+    public String save(@Valid FaqRegisterForm form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "faq/register";
+        }
 
-        // 게시물 저장
-        faqService.save(faq);
-        // 목록 페이지로 이동
+        // form -> Faq 도메인으로 데이터 set 후 build
+        try{
+            faqService.create(form.getTitle(),
+                    form.getContent(),
+                    FaqType.values()[Integer.parseInt(form.getType())],
+                    LocalDateTime.now());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            bindingResult.reject("faq register failed", e.getMessage());
+            return "faq/register";
+        }
+
         return "redirect:/faq";
     }
 }

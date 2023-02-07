@@ -1,149 +1,83 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/faq-layout}">
-<th:block layout:fragment="css">
-        <style>
-            .list-article {
-                height: 300px;
-                width: 100%;
-                background-color: #99ccff;
-            }
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Yeonhee">
 
-            .list-article-section{
-                width: 100%;
-                height: 100%;
-            }
+    <title>FAQ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link href="/css/faq.css" rel="stylesheet">
+    <script src="/js/faq.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 
-            #layout-content{
-                width: 100%;
-                height: 100%;
-            }
-
-            #register-button-section{
-                width: 100%;
-                height: 30px;
-            }
-
-            #register-btn{
-                float: right;
-            }
-        </style>
-
-    </th:block>
-
-<th:block layout:fragment="content">
+<body>
+    <header id="header">
+    헤더 삽입부
+    <hr>
+</header>
     <div id="layout-content">
-        <!--등록  버튼-->
-        <div id = "register-button-section">
-            <a th:href="@{/faq/register}">
-                <button type="button" class="btn btn-primary" id = "register-btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    등록
-                </button>
-            </a>
-        </div>
+    <!--등록  버튼-->
+    <div id = "register-button-section">
+        <a th:href="@{/faq/register}">
+            <button type="button" class="btn btn-primary" id = "register-btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                등록
+            </button>
+        </a>
+    </div>
 
-        <div class="list">
-            <!-- 탭 바 -->
-            <div class="list-tab">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item">
-                        <button class="nav-link active" id = "ALL" onclick="tab_click(id, -1)" aria-current="page">전체</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" id = "PAYMENT" onclick="tab_click(id, 0)" >결제/취소</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" id = "INQUIRY" onclick="tab_click(id, 1)" >이용문의</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link" id = "ETC" onclick="tab_click(id, 2)" >기타문의</button>
-                    </li>
+    <div class="list">
+        <!-- 탭 바 -->
+        <div class="list-tab">
+            <ul class="nav nav-pills nav-fill">
+                <li class="nav-item">
+                    <button class="nav-link active" id = "ALL" onclick="tab_click(id, -1)" aria-current="page">전체</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id = "PAYMENT" onclick="tab_click(id, 0)" >결제/취소</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id = "INQUIRY" onclick="tab_click(id, 1)" >이용문의</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id = "ETC" onclick="tab_click(id, 2)" >기타문의</button>
+                </li>
 
-                </ul>
-            </div >
+            </ul>
+        </div >
 
-            <!-- 게시글 목록 영역 -->
-            <div class="list-article">
-                <div class="list-article-section" id = "FaqListContentByType">
-                    <tr th:each="faq, faqState: ${faqList}">
-                        <div class="accordion" id="accordionExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                                            th:onclick="accordion_click(this)">
-                                        <span th:text="'[' + ${faq.type.description} + ']       '"></span>
-                                        <span th:text="${faq.title}"></span>
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        [[${faq.content}]]
-                                    </div>
+        <!-- 게시글 목록 영역 -->
+        <div class="list-article">
+            <div class="list-article-section" id = "FaqListContentByType">
+                <tr th:each="faq, faqState: ${faqList}">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                        th:onclick="accordion_click(this)">
+                                    <span th:text="'[' + ${faq.type.description} + ']       '"></span>
+                                    <span th:text="${faq.title}"></span>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    [[${faq.content}]]
                                 </div>
                             </div>
                         </div>
-                    </tr>
-                </div>
-
+                    </div>
+                </tr>
             </div>
+
         </div>
     </div>
-</th:block>
+</div>
+    <footer id="footer">
+        <hr>
+        푸터 삽입부
+    </footer>
+</body>
 
-<th:block layout:fragment="script">
-    <script th:inline="javascript">
-
-        // 현재 버튼 id
-        var cur_selected_btn_id = "ALL";
-
-        function tab_click(id, type) {
-
-            if(id ==  cur_selected_btn_id)
-                return;
-
-            var prev_elem = document.getElementById(cur_selected_btn_id);
-            prev_elem.classList.remove("active");
-
-            var elem = document.getElementById(id);
-            elem.classList.add("active");
-
-            cur_selected_btn_id = id;
-
-            $.ajax({
-                type: "POST",
-                url: "/faq",
-                data :{ faqTypeStr : id },
-                dataType : "text"
-            })
-                .done(function (result) {
-                    console.log(result);
-                    $("#FaqListContentByType").replaceWith(result);
-                })
-                .fail(function(jqXHR) {
-                    console.log(jqXHR);
-                })
-                .always(function() {
-                    console.log("요청, 응답 결과에 상관없이, 이건 항상 실행됩니다.");
-                })
-
-        }
-
-        function accordion_click(accordion){
-
-            if(accordion.classList.contains("collapsed"))
-                accordion.classList.remove("collapsed");
-            else
-                accordion.classList.add("collapsed");
-
-            // 부모 : parentNode
-            const parentElem = accordion.parentElement;
-            if(parentElem.nextElementSibling.classList.contains("show"))
-                parentElem.nextElementSibling.classList.remove("show");
-            else
-                parentElem.nextElementSibling.classList.add("show");
-
-        }
-    </script>
-</th:block>
 </html>
