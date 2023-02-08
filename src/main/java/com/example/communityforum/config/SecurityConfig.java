@@ -33,7 +33,8 @@ public class SecurityConfig {
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
-                                "/member/**"
+                                "/member/**",
+                                "/faq"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
