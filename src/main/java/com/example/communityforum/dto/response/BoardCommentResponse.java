@@ -12,18 +12,18 @@ public class BoardCommentResponse {
     private final String content;
     private final LocalDateTime registeredDate;
     private final String phone;
-    private final String userName;
+    private final String userId;
 
-    private BoardCommentResponse(Long id, String content, LocalDateTime registeredDate, String phone, String userName) {
+    private BoardCommentResponse(Long id, String content, LocalDateTime registeredDate, String phone, String userId) {
         this.id = id;
         this.content = content;
         this.registeredDate = registeredDate;
         this.phone = phone;
-        this.userName = userName;
+        this.userId = userId;
     }
 
-    public static BoardCommentResponse of(Long id, String content, LocalDateTime registeredDate, String phone, String userName){
-        return new BoardCommentResponse(id, content, registeredDate, phone, userName);
+    public static BoardCommentResponse of(Long id, String content, LocalDateTime registeredDate, String phone, String userId){
+        return new BoardCommentResponse(id, content, registeredDate, phone, userId);
     }
 
     public static BoardCommentResponse from(BoardCommentDto dto) {
@@ -32,7 +32,7 @@ public class BoardCommentResponse {
                 dto.getContent(),
                 dto.getRegisteredDate(),
                 dto.getUserAccountDto().getPhone(),
-                dto.getUserAccountDto().getUserName()
+                dto.getUserAccountDto().getUserId()
 
         );
     }
