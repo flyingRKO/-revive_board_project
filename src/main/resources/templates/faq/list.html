@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,8 +19,9 @@
     <hr>
 </header>
     <div id="layout-content">
+
     <!--등록  버튼-->
-    <div id = "register-button-section">
+    <div id = "register-button-section" sec:authorize="hasRole('ROLE_ADMIN')">
         <a th:href="@{/faq/register}">
             <button type="button" class="btn btn-primary" id = "register-btn" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                 등록

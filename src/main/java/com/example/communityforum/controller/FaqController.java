@@ -1,14 +1,20 @@
 package com.example.communityforum.controller;
 
+import com.example.communityforum.config.SecurityConfig;
 import com.example.communityforum.domain.Faq;
 import com.example.communityforum.domain.constants.FaqType;
+import com.example.communityforum.domain.member.Member;
+import com.example.communityforum.domain.member.MemberCustom;
+import com.example.communityforum.domain.member.MemberRole;
 import com.example.communityforum.dto.FaqRegisterForm;
+import com.example.communityforum.repository.MemberRepository;
 import com.example.communityforum.service.FaqService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -31,7 +37,7 @@ import java.util.Optional;
 public class FaqController {
 
     private final FaqService faqService;
-
+    private final MemberRepository memberRepository;
     @GetMapping
     String list(
             @PageableDefault(size = 6, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
@@ -69,6 +75,14 @@ public class FaqController {
 
     @PostMapping("/register")
     public String save(@Valid FaqRegisterForm form, BindingResult bindingResult) {
+
+        // 관리자 계정만 등록 가능
+        Object principal            = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MemberCustom memberCustom   = (MemberCustom)principal;
+        Member member               = memberRepository.findByMemberId(memberCustom.getUsername()).get();
+        if( MemberRole.ADMIN != member.getRole())
+            return "faq/register";
+
         if (bindingResult.hasErrors()) {
             return "faq/register";
         }
