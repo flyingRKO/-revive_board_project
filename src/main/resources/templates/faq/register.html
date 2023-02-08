@@ -18,43 +18,51 @@
     헤더 삽입부
     <hr>
 </header>
-    <form th:action="'/faq/register'" method="post">
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off"
-               th:name ="type" th:value="0" checked>
-        <label class="btn btn-outline-primary" for="btnradio1">결제/취소</label>
 
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
-               th:name ="type" th:value="1">
-        <label class="btn btn-outline-primary" for="btnradio2">이용문의</label>
-
-        <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off"
-               th:name ="type" th:value="2">
-        <label class="btn btn-outline-primary" for="btnradio3">기타문의</label>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            아이디 또는 비밀번호가 일치하지 않습니다.
+        </div>
     </div>
 
-    <!--        <div th:replace="~{form_errors :: formErrorsFragment}"></div>-->
-    <div class="mb-3">
-        <label for="title" class="form-label">제목</label>
-        <input type="text" class="form-control"
-               name="title" id="title"
-               th:name="title"
-               placeholder="게시글의 제목">
-    </div>
-    <div class="mb-3">
-        <label for="contents" class="form-label">내용</label>
-        <textarea class="form-control"
-                  name="contents"
-                  id="contents"
-                  rows="3"
-                  th:name="content"
-                  placeholder="게시글의 내용">
 
-            </textarea>
-    </div>
+    <form id= "register-form" action="/faq/register" th:object="${faqRegisterForm}" method="post">
+        <div th:replace="~{form_errors :: formErrorsFragment}"></div>
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" id="btnradio1" autocomplete="off"
+                   name ="type" value="0" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">결제/취소</label>
 
-    <button type="submit" class="btn btn-primary" th:onclick="register_faq()" >저장</button>
-    <button type="button" th:onclick="'history.back();'"  class="btn btn-primary">취소</button>
+            <input type="radio" class="btn-check" id="btnradio2" autocomplete="off"
+                   name ="type" value="1">
+            <label class="btn btn-outline-primary" for="btnradio2">이용문의</label>
+
+            <input type="radio" class="btn-check" id="btnradio3" autocomplete="off"
+                   name ="type" value="2">
+            <label class="btn btn-outline-primary" for="btnradio3">기타</label>
+        </div>
+
+        <div class="mb-3">
+            <label for="title" class="form-label">제목</label>
+            <input type="text" class="form-control"
+                   name="title" id="title"
+                   th:field="*{title}"
+                   placeholder="게시글의 제목">
+        </div>
+        <div class="mb-3">
+            <label for="contents" class="form-label">내용</label>
+            <textarea class="form-control"
+                      name="content"
+                      id="contents"
+                      rows="3"
+                      th:field="*{content}"
+                      placeholder="게시글의 내용">
+
+                </textarea>
+        </div>
+
+        <button class="btn btn-primary" th:onclick="register_faq()" >저장</button>
+        <button type="button" onclick="location.href='../faq'" class="btn btn-primary">취소</button>
 </form>
     <footer id="footer">
         <hr>

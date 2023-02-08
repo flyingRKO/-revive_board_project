@@ -1,7 +1,7 @@
 // 현재 버튼 id
 var cur_selected_btn_id = "ALL";
 
-function tab_click(id, type) {
+function tab_click(id) {
 
     if(id ==  cur_selected_btn_id)
         return;
@@ -68,5 +68,25 @@ function select_type(id) {
 }
 
 function register_faq(){
-    alert("저장되었습니다.");
+    var $form = $('#register-form');
+
+    $.ajax({
+        url: $form.attr('action'),
+        type: $form.attr('method'),
+        data: {
+            type: $form.find(".btn-check:checked").val(),
+            title: $form.find('input[name=title]').val(),
+            content: $form.find('input[name=content]').val(),
+        },
+        success: function (data) {
+            if("redirect:/faq" == data)
+                alert("저장되었습니다.");
+
+            location.href = data;
+        },
+        error: function (data) {
+            console.log(data);
+            alert("저장 실패");
+        }
+    })
 }
