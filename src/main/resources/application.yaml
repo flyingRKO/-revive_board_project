@@ -1,8 +1,18 @@
+debug: false
+management.endpoints.web.exposure.include: "*"
+
+logging:
+  level:
+    com.example.communityforum: debug
+    org.springframework.web.servlet: debug
+    org.hibernate.type.desriptor.sql.BasicBinder: trace
+
+
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/board
-    username: chan
-    password: chan
+    url: jdbc:mysql://localhost:3306/community_forum
+    username: root
+    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     open-in-view: false
