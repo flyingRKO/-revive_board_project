@@ -18,19 +18,15 @@ function tab_click(id) {
         type: "POST",
         url: "/faq",
         data :{ faqTypeStr : id },
-        dataType : "text"
-    })
-        .done(function (result) {
-            console.log(result);
+        dataType : "text",
+        success: function (result) {
             $("#FaqListContentByType").replaceWith(result);
-        })
-        .fail(function(jqXHR) {
+        },
+        fail: function(jqXHR) {
+            alert("fail");
             console.log(jqXHR);
-        })
-        .always(function() {
-            console.log("요청, 응답 결과에 상관없이, 이건 항상 실행됩니다.");
-        })
-
+        },
+    })
 }
 
 function accordion_click(accordion){
