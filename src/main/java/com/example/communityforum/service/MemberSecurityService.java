@@ -1,6 +1,7 @@
 package com.example.communityforum.service;
 
 import com.example.communityforum.domain.member.Member;
+import com.example.communityforum.domain.member.MemberCustom;
 import com.example.communityforum.domain.member.MemberRole;
 import com.example.communityforum.repository.MemberRepository;
 
@@ -26,6 +27,7 @@ public class MemberSecurityService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+
         Optional<Member> _siteUser = this.memberRepository.findByMemberId(memberId);
         if (_siteUser.isEmpty()) {
             throw new UsernameNotFoundException("사용자를 찾을수 없습니다.");
@@ -35,11 +37,11 @@ public class MemberSecurityService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         MemberRole _siteUserRole = siteUser.getRole();
 
-        if (MemberRole.ADMIN.getValue().equals(_siteUserRole)) {
+        if (MemberRole.ADMIN.getValue().equals("ROLE_"+_siteUserRole)) {
             authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getValue()));
         }
-        return new User(siteUser.getMemberId(), siteUser.getMemberPassword(), authorities);
+        return new MemberCustom(siteUser.getMemberId(), siteUser.getMemberPassword(), siteUser.getName(), authorities);
     }
 }
