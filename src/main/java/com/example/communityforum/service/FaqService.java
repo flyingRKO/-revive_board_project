@@ -1,6 +1,7 @@
 package com.example.communityforum.service;
 
 import com.example.communityforum.domain.Faq;
+import com.example.communityforum.domain.Member;
 import com.example.communityforum.domain.constants.FaqType;
 import com.example.communityforum.repository.FaqRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,9 @@ public class FaqService {
         return faqRepository.findAllByType(type, pageable);
     }
 
-    public void create(String title, String content, FaqType type, LocalDateTime registeredDate) {
+    public void create(Member member, String title, String content, FaqType type, LocalDateTime registeredDate) {
         Faq faq = Faq.builder()
+                .member(member)
                 .type(type)
                 .title(title)
                 .content(content)
