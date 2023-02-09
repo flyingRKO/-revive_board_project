@@ -36,10 +36,6 @@ public class Faq {
     private String content;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
-
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime registeredDate;
