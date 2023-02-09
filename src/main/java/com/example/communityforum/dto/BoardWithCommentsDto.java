@@ -1,8 +1,7 @@
 package com.example.communityforum.dto;
 
 import com.example.communityforum.domain.Board;
-import com.example.communityforum.domain.UserAccount;
-import com.example.communityforum.domain.constant.BoardType;
+import com.example.communityforum.domain.constants.BoardType;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 @Getter
 public class BoardWithCommentsDto {
     private  final Long id;
-    private  final UserAccountDto userAccountDto;
+    private  final MemberDto memberDto;
     private  final Set<BoardCommentDto> boardCommentDtos;
     private  final BoardType boardType;
     private  final String title;
@@ -22,7 +21,7 @@ public class BoardWithCommentsDto {
     private  final LocalDateTime modifiedDate;
 
     private BoardWithCommentsDto(Long id,
-                                UserAccountDto userAccountDto,
+                                MemberDto memberDto,
                                 Set<BoardCommentDto> boardCommentDtos,
                                 BoardType boardType,
                                 String title,
@@ -31,7 +30,7 @@ public class BoardWithCommentsDto {
                                 LocalDateTime modifiedDate
     ) {
         this.id = id;
-        this.userAccountDto = userAccountDto;
+        this.memberDto = memberDto;
         this.boardCommentDtos = boardCommentDtos;
         this.boardType = boardType;
         this.title = title;
@@ -41,7 +40,7 @@ public class BoardWithCommentsDto {
     }
 
     public static BoardWithCommentsDto of(Long id,
-                                          UserAccountDto userAccountDto,
+                                          MemberDto memberDto,
                                           Set<BoardCommentDto> boardCommentDtos,
                                           BoardType boardType,
                                           String title,
@@ -50,7 +49,7 @@ public class BoardWithCommentsDto {
                                           LocalDateTime modifiedDate
     ) {
         return new BoardWithCommentsDto(id,
-                userAccountDto,
+                memberDto,
                 boardCommentDtos,
                 boardType,
                 title,
@@ -62,7 +61,7 @@ public class BoardWithCommentsDto {
     public static BoardWithCommentsDto from(Board entity) {
         return new BoardWithCommentsDto(
                 entity.getId(),
-                UserAccountDto.from(entity.getUserAccount()),
+                MemberDto.from(entity.getMember()),
                 entity.getBoardComments().stream()
                         .map(BoardCommentDto::from)
                         .collect(Collectors.toCollection(LinkedHashSet::new)),

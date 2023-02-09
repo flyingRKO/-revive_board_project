@@ -5,7 +5,7 @@
 
     <attr sel="#article-main" th:object="${board}">
         <attr sel="#article-header/h1" th:text="*{title}" />
-        <attr sel="#nickname" th:text="*{userId}" />
+        <attr sel="#nickname" th:text="*{memberId}" />
         <attr sel="#created-at" th:datetime="*{registeredDate}" th:text="*{#temporals.format(registeredDate, 'yyyy-MM-dd HH:mm:ss')}" />
         <attr sel="#board-content/pre" th:text="*{content}" />
 
@@ -22,7 +22,7 @@
         <attr sel="#article-comments" th:remove="all-but-first">
             <attr sel="li[0]" th:each="boardComment : ${boardComments}">
                 <attr sel="form" th:action="'/comments/' + ${boardComment.id} + '/delete'" th:method="post">
-                    <attr sel="div/strong" th:text="${boardComment.userId}" />
+                    <attr sel="div/strong" th:text="${boardComment.memberId}" />
                     <attr sel="div/small/time" th:datetime="${boardComment.registeredDate}" th:text="${#temporals.format(boardComment.registeredDate, 'yyyy-MM-dd HH:mm:ss')}" />
                     <attr sel="div/p" th:text="${boardComment.content}" />
 

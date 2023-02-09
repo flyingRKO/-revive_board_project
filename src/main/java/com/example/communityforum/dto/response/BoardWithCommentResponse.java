@@ -2,7 +2,6 @@ package com.example.communityforum.dto.response;
 
 import com.example.communityforum.dto.BoardWithCommentsDto;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -16,7 +15,7 @@ public class BoardWithCommentResponse {
     private final String content;
     private final LocalDateTime registeredDate;
     private final String phone;
-    private final String userId;
+    private final String memberId;
     private final Set<BoardCommentResponse> boardCommentResponses;
 
     private BoardWithCommentResponse(Long id,
@@ -24,7 +23,7 @@ public class BoardWithCommentResponse {
                                     String content,
                                     LocalDateTime registeredDate,
                                     String phone,
-                                    String userId,
+                                    String memberId,
                                     Set<BoardCommentResponse> boardCommentResponses
     ) {
         this.id = id;
@@ -32,7 +31,7 @@ public class BoardWithCommentResponse {
         this.content = content;
         this.registeredDate = registeredDate;
         this.phone = phone;
-        this.userId = userId;
+        this.memberId = memberId;
         this.boardCommentResponses = boardCommentResponses;
     }
 
@@ -41,10 +40,10 @@ public class BoardWithCommentResponse {
                                               String content,
                                               LocalDateTime registeredDate,
                                               String phone,
-                                              String userId,
+                                              String memberId,
                                               Set<BoardCommentResponse> boardCommentResponses
     ) {
-        return new BoardWithCommentResponse(id, title, content, registeredDate, phone, userId, boardCommentResponses);
+        return new BoardWithCommentResponse(id, title, content, registeredDate, phone, memberId, boardCommentResponses);
     }
 
     public static BoardWithCommentResponse from(BoardWithCommentsDto dto) {
@@ -53,8 +52,8 @@ public class BoardWithCommentResponse {
                 dto.getTitle(),
                 dto.getContent(),
                 dto.getRegisteredDate(),
-                dto.getUserAccountDto().getPhone(),
-                dto.getUserAccountDto().getUserId(),
+                dto.getMemberDto().getPhone(),
+                dto.getMemberDto().getMemberId(),
                 dto.getBoardCommentDtos().stream()
                         .map(BoardCommentResponse::from)
                         .collect(Collectors.toCollection(LinkedHashSet::new))

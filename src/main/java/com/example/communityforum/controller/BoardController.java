@@ -1,9 +1,9 @@
 package com.example.communityforum.controller;
 
-import com.example.communityforum.domain.constant.FormStatus;
-import com.example.communityforum.domain.constant.Role;
-import com.example.communityforum.domain.constant.SearchType;
-import com.example.communityforum.dto.UserAccountDto;
+import com.example.communityforum.domain.constants.FormStatus;
+import com.example.communityforum.domain.constants.MemberRole;
+import com.example.communityforum.domain.constants.SearchType;
+import com.example.communityforum.dto.MemberDto;
 import com.example.communityforum.dto.request.BoardRequest;
 import com.example.communityforum.dto.response.BoardResponse;
 import com.example.communityforum.dto.response.BoardWithCommentResponse;
@@ -15,8 +15,6 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/boards")
@@ -55,8 +53,8 @@ public class BoardController {
     @PostMapping("/form")
     public String postNewBoard(BoardRequest boardRequest) {
         // 인증 정보를 넣어줘야 함
-        boardService.saveBoard(boardRequest.toDto(UserAccountDto.of(
-                "rko", "111111", "이재훈", "01011114444", Role.GENERAL, true
+        boardService.saveBoard(boardRequest.toDto(MemberDto.of(
+                "rko", "111111", "이재훈", "01011114444", MemberRole.USER, true
         )));
 
         return "redirect:/boards";
@@ -75,8 +73,8 @@ public class BoardController {
     @PostMapping("/{boardId}/form")
     public String updateBoard(@PathVariable Long boardId, BoardRequest boardRequest){
         // 인증 정보 넣어줘야 함
-        boardService.updateBoard(boardId, boardRequest.toDto(UserAccountDto.of(
-                "rko", "111111", "이재훈", "01011114444", Role.GENERAL, true
+        boardService.updateBoard(boardId, boardRequest.toDto(MemberDto.of(
+                "rko", "111111", "이재훈", "01011114444", MemberRole.USER, true
         )));
 
         return "redirect:/boards/" + boardId;

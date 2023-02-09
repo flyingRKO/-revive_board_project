@@ -1,7 +1,7 @@
 package com.example.communityforum.dto.request;
 
 import com.example.communityforum.dto.BoardCommentDto;
-import com.example.communityforum.dto.UserAccountDto;
+import com.example.communityforum.dto.MemberDto;
 import lombok.Getter;
 
 @Getter
@@ -18,10 +18,10 @@ public class BoardCommentRequest {
         return new BoardCommentRequest(boardId, content);
     }
 
-    public BoardCommentDto toDto(UserAccountDto userAccountDto){
+    public BoardCommentDto toDto(MemberDto memberDto){
         return BoardCommentDto.of(
                 boardId,
-                userAccountDto,
+                memberDto,
                 content
         );
     }

@@ -24,20 +24,20 @@ public class BoardComment {
     private Long id;
 
     @Setter @ManyToOne(optional = false) private Board board; // 게시글 (ID)
-    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "memberId") private Member member; // 유저 정보
     @Setter @Column(nullable = false, length = 50) private String content; // 본문
     @CreatedDate @Column(nullable = false) private LocalDateTime registeredDate; // 생성일시
 
     protected BoardComment() {}
 
-    private BoardComment(Board board, UserAccount userAccount, String content) {
+    private BoardComment(Board board, Member member, String content) {
         this.board = board;
-        this.userAccount = userAccount;
+        this.member = member;
         this.content = content;
     }
 
-    public static BoardComment of(Board board, UserAccount userAccount, String content){
-        return new BoardComment(board, userAccount, content);
+    public static BoardComment of(Board board, Member member, String content){
+        return new BoardComment(board, member, content);
     }
 
     @Override

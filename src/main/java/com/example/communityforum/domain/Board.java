@@ -1,6 +1,6 @@
 package com.example.communityforum.domain;
 
-import com.example.communityforum.domain.constant.BoardType;
+import com.example.communityforum.domain.constants.BoardType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -28,7 +28,7 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "memberId") private Member member; // 유저 정보
 
     @Setter
     @Column(nullable = false)
@@ -51,15 +51,15 @@ public class Board {
 
     protected Board() {}
 
-    private Board(UserAccount userAccount, BoardType boardType, String title, String content) {
-        this.userAccount = userAccount;
+    private Board(Member member, BoardType boardType, String title, String content) {
+        this.member = member;
         this.boardType = boardType;
         this.title = title;
         this.content = content;
     }
 
-    public static Board of(UserAccount userAccount, BoardType boardType, String title, String content) {
-        return new Board(userAccount, boardType, title, content);
+    public static Board of(Member member, BoardType boardType, String title, String content) {
+        return new Board(member, boardType, title, content);
     }
 
     @Override

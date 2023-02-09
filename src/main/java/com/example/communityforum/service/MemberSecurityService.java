@@ -1,15 +1,14 @@
 package com.example.communityforum.service;
 
-import com.example.communityforum.domain.member.Member;
-import com.example.communityforum.domain.member.MemberCustom;
-import com.example.communityforum.domain.member.MemberRole;
+import com.example.communityforum.domain.Member;
+import com.example.communityforum.domain.MemberCustom;
+import com.example.communityforum.domain.constants.MemberRole;
 import com.example.communityforum.repository.MemberRepository;
 
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

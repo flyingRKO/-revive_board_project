@@ -2,11 +2,11 @@ package com.example.communityforum.service;
 
 import com.example.communityforum.domain.Board;
 import com.example.communityforum.domain.BoardComment;
-import com.example.communityforum.domain.UserAccount;
+import com.example.communityforum.domain.Member;
 import com.example.communityforum.dto.BoardCommentDto;
 import com.example.communityforum.repository.BoardCommentRepository;
 import com.example.communityforum.repository.BoardRepository;
-import com.example.communityforum.repository.UserAccountRepository;
+import com.example.communityforum.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,15 +21,15 @@ import javax.persistence.EntityNotFoundException;
 public class BoardCommentService {
     private final BoardRepository boardRepository;
     private final BoardCommentRepository boardCommentRepository;
-    private final UserAccountRepository userAccountRepository;
+    private final MemberRepository memberRepository;
 
     public void saveBoardComment(BoardCommentDto dto) {
         try{
             Board board = boardRepository.getReferenceById(dto.getBoardId());
 
-            UserAccount userAccount = userAccountRepository.getReferenceById(dto.getUserAccountDto().getUserId());
+            Member member = memberRepository.getReferenceById(dto.getMemberDto().getMemberId());
 
-            boardCommentRepository.save(dto.toEntity(board, userAccount));
+            boardCommentRepository.save(dto.toEntity(board, member));
         } catch (EntityNotFoundException e){
             log.warn("댓글 저장 실패. 댓글 작성에 필요한 정보를 찾을 수 없습니다 - {}", e.getLocalizedMessage());
         }

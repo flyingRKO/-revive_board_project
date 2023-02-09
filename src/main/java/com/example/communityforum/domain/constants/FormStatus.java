@@ -1,4 +1,4 @@
-package com.example.communityforum.domain.constant;
+package com.example.communityforum.domain.constants;
 
 import lombok.Getter;
 

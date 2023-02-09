@@ -1,6 +1,6 @@
 package com.example.communityforum.controller;
 
-import com.example.communityforum.dto.UserAccountDto;
+import com.example.communityforum.dto.MemberDto;
 import com.example.communityforum.dto.request.BoardCommentRequest;
 import com.example.communityforum.service.BoardCommentService;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class BoardCommentController {
 
     @PostMapping("/new")
     public String postNewBoardComment(BoardCommentRequest boardCommentRequest){
-        boardCommentService.saveBoardComment(boardCommentRequest.toDto(UserAccountDto.of(
+        boardCommentService.saveBoardComment(boardCommentRequest.toDto(MemberDto.of(
                 "rko", "1234", null, null, null, true
         )));
 

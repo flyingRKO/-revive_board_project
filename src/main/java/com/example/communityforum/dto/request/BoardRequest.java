@@ -1,7 +1,7 @@
 package com.example.communityforum.dto.request;
 
 import com.example.communityforum.dto.BoardDto;
-import com.example.communityforum.dto.UserAccountDto;
+import com.example.communityforum.dto.MemberDto;
 import lombok.Getter;
 
 @Getter
@@ -18,9 +18,9 @@ public class BoardRequest {
         return new BoardRequest(title, content);
     }
 
-    public BoardDto toDto(UserAccountDto userAccountDto){
+    public BoardDto toDto(MemberDto memberDto){
         return BoardDto.of(
-                userAccountDto,
+                memberDto,
                 title,
                 content
         );
