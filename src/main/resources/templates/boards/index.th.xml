@@ -19,6 +19,25 @@
 
         <attr sel="#write-board" sec:authorize="isAuthenticated()" th:href="@{/boards/form}" />
 
+        <attr sel="#pagination">
+            <attr sel="li[0]/a"
+                  th:text="'이전'"
+                  th:href="@{/boards(page=${boards.number - 1})}"
+                  th:class="'page-link' + (${boards.number} <= 0 ? ' disabled' : '')"
+            />
+            <attr sel="li[1]" th:class="page-item" th:each="pageNumber : ${paginationBarNumbers}">
+                <attr sel="a"
+                      th:text="${pageNumber + 1}"
+                      th:href="@{/boards(page=${pageNumber})}"
+                      th:class="'page-link' + (${pageNumber} == ${boards.number} ? ' disabled' : '')"
+                />
+            </attr>
+            <attr sel="li[2]/a"
+                  th:text="'다음'"
+                  th:href="@{/boards(page=${boards.number + 1})}"
+                  th:class="'page-link' + (${boards.number} >= ${boards.totalPages - 1} ? ' disabled' : '')"
+            />
+        </attr>
 
     </attr>
 </thlogic>

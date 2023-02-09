@@ -94,6 +94,8 @@ public class BoardService {
         boardRepository.deleteByIdAndMember_MemberId(boardId, memberId);
     }
 
-
+    public long getBoardCount() {
+        return boardRepository.count();
+    }
 
 }
