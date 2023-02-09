@@ -1,11 +1,10 @@
 package com.example.communityforum.controller;
 
-import com.example.communityforum.config.SecurityConfig;
 import com.example.communityforum.domain.Faq;
+import com.example.communityforum.domain.Member;
 import com.example.communityforum.domain.constants.FaqType;
-import com.example.communityforum.domain.member.Member;
-import com.example.communityforum.domain.member.MemberCustom;
-import com.example.communityforum.domain.member.MemberRole;
+import com.example.communityforum.domain.MemberCustom;
+import com.example.communityforum.domain.constants.MemberRole;
 import com.example.communityforum.dto.FaqRegisterForm;
 import com.example.communityforum.repository.MemberRepository;
 import com.example.communityforum.service.FaqService;
@@ -25,11 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor

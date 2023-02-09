@@ -1,10 +1,7 @@
 package com.example.communityforum.domain.member;
 
-import com.example.communityforum.repository.MemberRepository;
+import com.example.communityforum.domain.constants.MemberRole;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class MemberTest {
 

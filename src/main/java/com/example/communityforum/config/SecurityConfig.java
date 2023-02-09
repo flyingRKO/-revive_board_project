@@ -27,7 +27,7 @@ public class SecurityConfig {
                                 HttpMethod.GET,
                                 "/",
                                 "/notice",
-                                "/forum",
+                                "/boards",
                                 "/faq",
                                 "/member/**"
                         ).permitAll()

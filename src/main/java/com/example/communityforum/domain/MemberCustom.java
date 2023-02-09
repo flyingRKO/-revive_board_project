@@ -1,4 +1,4 @@
-package com.example.communityforum.domain.member;
+package com.example.communityforum.domain;
 
 import lombok.Getter;
 import lombok.Setter;
