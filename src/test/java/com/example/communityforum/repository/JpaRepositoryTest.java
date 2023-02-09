@@ -1,7 +1,9 @@
 package com.example.communityforum.repository;
 
 import com.example.communityforum.domain.Faq;
+import com.example.communityforum.domain.Member;
 import com.example.communityforum.domain.constants.FaqType;
+import com.example.communityforum.domain.constants.MemberRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +27,10 @@ public class JpaRepositoryTest {
 
     @Test
     void 저장(){
+        Member user = Member.of("test", "test", "test", "01012345678", MemberRole.ADMIN, true);
+
         Faq faq = Faq.builder()
-                .userId(2)
+                .member(user)
                 .title("abcde")
                 .content("contents")
                 .type(FaqType.ETC)

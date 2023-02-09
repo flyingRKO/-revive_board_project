@@ -23,3 +23,12 @@ values ('chan0729', '$2a$10$QNgQVbxlHVim/zIbkoPcOe7EYvHB2BfHEufLHYwnzUCZgPMuuG/4
     insert into board_comment (member_id, board_id, content, registered_date) values
     ('rko', 1,'lololol','2023-01-01 10:14:25'),
     ('rko2', 2,'wowowow','2023-01-02 10:14:25');
+
+-- faq
+    insert into faq (id, member_id, type, title, content, registered_date ) values
+    (1, 'admin01',  'ETC',      '기타문의제목제목',         '기타문의내용내용',        '2023-01-09 14:48:22.137575'),
+    (2, 'admin01',  'INQUIRY',  '이용문의제목제목',         '이용문의내용내용',        '2023-01-19 14:48:22.137575'),
+    (3, 'admin01',  'PAYMENT',  '결제취소문의제목제목1111',  '결제취소문의내용내용',    '2023-02-01 14:48:22.137575'),
+    (4, 'admin01',  'INQUIRY',  '이용문의제목제목',         '무늬무늬이용문의내용',     '2023-02-02 14:48:22.137575'),
+    (5, 'admin01',  'PAYMENT',  '결제취소문의제목제목2222',  '결제취소문의내용내용12341234', '2023-01-01 14:48:22.137575');
+

@@ -83,7 +83,8 @@ public class FaqController {
 
         // form -> Faq 도메인으로 데이터 set 후 build
         try{
-            faqService.create(form.getTitle(),
+            faqService.create(member,
+                    form.getTitle(),
                     form.getContent(),
                     FaqType.values()[Integer.parseInt(form.getType())],
                     LocalDateTime.now());
