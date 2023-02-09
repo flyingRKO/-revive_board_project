@@ -8,10 +8,10 @@ values ('chan0729', '$2a$10$QNgQVbxlHVim/zIbkoPcOe7EYvHB2BfHEufLHYwnzUCZgPMuuG/4
 
 -- 테스트 계정
     insert into member (member_id, member_password, name, phone, term, role) VALUES
-    ('rko','{noop}123456', '이재철', '01011113333', 1, 'USER')
+    ('rko','{noop}asdf1234', '이재철', '01011113333', 1, 'USER')
 ;
     insert into member (member_id, member_password, name, phone, term, role) VALUES
-    ('rko2','{noop}111111','이재훈', '01011112222', 1, 'USER')
+    ('rko2','{noop}qwer1234','이재훈', '01011112222', 1, 'USER')
 ;
 
 -- 게시글

@@ -39,7 +39,7 @@ public class Member {
     }
 
     public static Member of(String memberId, String memberPassword, String name, String phone, Boolean agreedTerm) {
-        return new Member(memberId, memberPassword, name, phone, null,agreedTerm);
+        return new Member(memberId, memberPassword, name, phone, null, agreedTerm);
     }
     public static Member of(String memberId, String memberPassword, String name, String phone, MemberRole role, Boolean agreedTerm) {
         return new Member(memberId, memberPassword, name, phone, role, agreedTerm);

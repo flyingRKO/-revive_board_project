@@ -22,6 +22,9 @@ public interface BoardRepository extends
     Page<Board> findByContentContaining(String content, Pageable pageable);
     Page<Board> findByMember_MemberIdContaining(String memberId, Pageable pageable);
     Page<Board> findByMember_NameContaining(String name, Pageable pageable);
+
+    void deleteByIdAndMember_MemberId(Long boardCommentId, String memberId);
+
     @Override
     default void customize(QuerydslBindings bindings, QBoard root){
         bindings.excludeUnlistedProperties(true);

@@ -16,6 +16,9 @@ public interface BoardCommentRepository extends
         QuerydslPredicateExecutor<BoardComment>,
         QuerydslBinderCustomizer<QBoardComment>
 {
+
+    void deleteByIdAndMember_MemberId(Long boardCommentId, String memberId);
+
     @Override
     default void customize(QuerydslBindings bindings, QBoardComment root){
         bindings.excludeUnlistedProperties(true);

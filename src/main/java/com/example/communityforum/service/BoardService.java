@@ -77,18 +77,21 @@ public class BoardService {
     public void updateBoard(Long boardId, BoardDto dto){
         try {
             Board board = boardRepository.getReferenceById(boardId);
-            if (dto.getTitle() != null) { board.setTitle(dto.getTitle());}
-            if (dto.getContent() != null) { board.setContent(dto.getContent());}
+
+            Member member = memberRepository.getReferenceById(dto.getMemberDto().getMemberId());
+
+            if (board.getMember().equals(member)){
+                if (dto.getTitle() != null) { board.setTitle(dto.getTitle());}
+                if (dto.getContent() != null) { board.setContent(dto.getContent());}
+            }
         } catch (EntityNotFoundException e) {
-            log.warn("게시글 업데이트 실패. 게시글을 찾을 수 없습니다 - dto: {}", dto);
+            log.warn("게시글 업데이트 실패. 수정에 필요한 정보를 찾을 수 없습니다 - {}", e.getLocalizedMessage());
         }
-
-
 
     }
 
-    public void deleteBoard(long boardId){
-        boardRepository.deleteById(boardId);
+    public void deleteBoard(long boardId, String memberId){
+        boardRepository.deleteByIdAndMember_MemberId(boardId, memberId);
     }
 
 

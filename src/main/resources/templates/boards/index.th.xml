@@ -17,7 +17,7 @@
             </attr>
         </attr>
 
-        <attr sel="#write-board"  th:href="@{/boards/form}" />
+        <attr sel="#write-board" sec:authorize="isAuthenticated()" th:href="@{/boards/form}" />
 
 
     </attr>

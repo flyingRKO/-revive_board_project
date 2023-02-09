@@ -9,10 +9,11 @@
         <attr sel="#created-at" th:datetime="*{registeredDate}" th:text="*{#temporals.format(registeredDate, 'yyyy-MM-dd HH:mm:ss')}" />
         <attr sel="#board-content/pre" th:text="*{content}" />
 
-
+        <attr sel="#article-buttons" th:if="${#authorization.expression('isAuthenticated()')} and *{memberId} == ${#authentication.name}">
             <attr sel="#delete-article-form" th:action="'/boards/' + *{id} + '/delete'" th:method="post">
                 <attr sel="#update-article" th:href="'/boards/' + *{id} + '/form'"/>
             </attr>
+        </attr>
 
         <attr sel=".article-id" th:name="boardId" th:value="*{id}" />
         <attr sel="#comment-form" th:action="@{/comments/new}" th:method="post">
@@ -25,6 +26,7 @@
                     <attr sel="div/strong" th:text="${boardComment.memberId}" />
                     <attr sel="div/small/time" th:datetime="${boardComment.registeredDate}" th:text="${#temporals.format(boardComment.registeredDate, 'yyyy-MM-dd HH:mm:ss')}" />
                     <attr sel="div/p" th:text="${boardComment.content}" />
+                    <attr sel="button" th:if="${#authorization.expression('isAuthenticated()')} and ${boardComment.memberId} == ${#authentication.name}"/>
 
                 </attr>
             </attr>

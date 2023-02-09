@@ -46,7 +46,7 @@ public class BoardCommentService {
         }
     }
 
-    public void deleteBoardComment(Long boardCommentId) {
-        boardCommentRepository.deleteById(boardCommentId);
+    public void deleteBoardComment(Long boardCommentId, String memberId) {
+        boardCommentRepository.deleteByIdAndMember_MemberId(boardCommentId, memberId);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.communityforum.controller;
 
+import com.example.communityforum.domain.MemberCustom;
 import com.example.communityforum.domain.constants.FormStatus;
 import com.example.communityforum.domain.constants.MemberRole;
 import com.example.communityforum.domain.constants.SearchType;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -51,11 +53,12 @@ public class BoardController {
     }
 
     @PostMapping("/form")
-    public String postNewBoard(BoardRequest boardRequest) {
-        // 인증 정보를 넣어줘야 함
-        boardService.saveBoard(boardRequest.toDto(MemberDto.of(
-                "rko", "111111", "이재훈", "01011114444", MemberRole.USER, true
-        )));
+    public String postNewBoard(
+            @AuthenticationPrincipal MemberCustom memberCustom,
+            BoardRequest boardRequest
+    ) {
+
+        boardService.saveBoard(boardRequest.toDto(memberCustom.toDto()));
 
         return "redirect:/boards";
     }
@@ -71,20 +74,25 @@ public class BoardController {
     }
 
     @PostMapping("/{boardId}/form")
-    public String updateBoard(@PathVariable Long boardId, BoardRequest boardRequest){
-        // 인증 정보 넣어줘야 함
-        boardService.updateBoard(boardId, boardRequest.toDto(MemberDto.of(
-                "rko", "111111", "이재훈", "01011114444", MemberRole.USER, true
-        )));
+    public String updateBoard(
+            @PathVariable Long boardId,
+            @AuthenticationPrincipal MemberCustom memberCustom,
+            BoardRequest boardRequest
+    ){
+
+        boardService.updateBoard(boardId, boardRequest.toDto(memberCustom.toDto()));
 
         return "redirect:/boards/" + boardId;
     }
 
 
     @PostMapping("/{boardId}/delete")
-    public String deleteBoard(@PathVariable Long boardId){
-        // 인증 정보 넣어줘야 함
-        boardService.deleteBoard(boardId);
+    public String deleteBoard(
+            @PathVariable Long boardId,
+            @AuthenticationPrincipal MemberCustom memberCustom
+    ){
+
+        boardService.deleteBoard(boardId, memberCustom.getUsername());
 
         return "redirect:/boards";
     }

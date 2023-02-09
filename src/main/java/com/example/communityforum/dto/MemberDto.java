@@ -22,6 +22,9 @@ public class MemberDto {
         this.agreedTerm = agreedTerm;
     }
 
+    public static MemberDto of(String userName, String password, String name){
+        return new MemberDto(userName, password, name, null, MemberRole.USER, true);
+    }
     public static MemberDto of(String userId, String password, String name, String phone, MemberRole role, boolean term){
         return new MemberDto(userId, password, name, phone, role, term);
     }
