@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RequestMapping("/comments")
 @Controller
@@ -21,7 +23,7 @@ public class BoardCommentController {
     @PostMapping("/new")
     public String postNewBoardComment(
             @AuthenticationPrincipal MemberCustom memberCustom,
-            BoardCommentRequest boardCommentRequest
+            @Valid BoardCommentRequest boardCommentRequest
     ){
         boardCommentService.saveBoardComment(boardCommentRequest.toDto(memberCustom.toDto()));
 

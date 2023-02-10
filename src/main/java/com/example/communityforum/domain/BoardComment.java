@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -25,7 +26,10 @@ public class BoardComment {
 
     @Setter @ManyToOne(optional = false) private Board board; // 게시글 (ID)
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "memberId") private Member member; // 유저 정보
-    @Setter @Column(nullable = false, length = 50) private String content; // 본문
+    @Setter
+    @Column(nullable = false, length = 50)
+    @Size(min = 2, max = 50, message = "댓글을 2~50자 사이로 입력해주세요.")
+    private String content; // 본문
     @CreatedDate @Column(nullable = false) private LocalDateTime registeredDate; // 생성일시
 
     protected BoardComment() {}
