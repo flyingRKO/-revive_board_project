@@ -1,8 +1,8 @@
 package com.example.communityforum.controller;
 
 import com.example.communityforum.domain.Board;
-import com.example.communityforum.domain.constant.BoardType;
-import com.example.communityforum.service.BoardService;
+import com.example.communityforum.domain.constants.BoardType;
+import com.example.communityforum.service.NoticeBoardService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @Builder
 //@RequestMapping("/boards")
 public class NoticeBoardController {
-    private final BoardService boardService;
+    private final NoticeBoardService boardService;
 
     @GetMapping("/board/noticeBoardForm")
     public String noticeBoardWriteForm() {

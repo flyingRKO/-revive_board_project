@@ -34,7 +34,8 @@ public class SecurityConfig {
                                 "/notice",
                                 "/boards/**",
                                 "/faq",
-                                "/member/**"
+                                "/member/**",
+                                "/board/noticeBoardList"
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
