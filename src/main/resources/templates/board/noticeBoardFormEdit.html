@@ -8,13 +8,13 @@
 </head>
 <th:block layout:fragment="content">
     <div>수정수정</div>
-    <form th:action="@{/board/noticeBoardFormProcess}" method="post">
-        <input type="hidden" id="id" name="id" th:value="${board.id}"/>
+    <form th:action="@{/noticeBoard/noticeBoardFormProcess}" method="post">
+        <input type="hidden" id="id" name="id" th:value="${noticeBoard.id}"/>
         <div class="mb-3">
             <label for="title" class="form-label">제목:</label>
             <input type="text" class="form-control"
                    name="title" id="title"
-                   placeholder="게시글의 제목" th:value="${board.title}">
+                   placeholder="게시글의 제목" th:value="${noticeBoard.title}">
 
         </div>
         <div class="mb-3">
@@ -22,9 +22,9 @@
             <textarea class="form-control"
                       name="content"
                       id="content"
-                      rows="3">[[${board.content}]]</textarea>
+                      rows="3">[[${noticeBoard.content}]]</textarea>
         </div>
-        <button type="button" class="btn btn-primary" onclick="location.href='/board/noticeBoardList'" >취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/noticeBoard/noticeBoardList'" >취소</button>
         <button type="submit" class="btn btn-primary">등록하기</button>
         <div><br></div>
     </form>

@@ -12,7 +12,10 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@Table
+@Table(indexes = {
+        @Index(columnList = "content"),
+        @Index(columnList = "registeredDate")
+})
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 public class BoardComment {
@@ -20,19 +23,22 @@ public class BoardComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false) private Board board; // 게시글 (ID)
+    @Setter @ManyToOne(optional = false) private NoticeBoard noticeBoard; // 게시글 (ID)
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
+    private UserAccount userAccount; // 유저 정보
     @Setter @Column(nullable = false, length = 50) private String content; // 본문
     @CreatedDate @Column(nullable = false) private LocalDateTime registeredDate; // 생성일시
 
     protected BoardComment() {}
 
-    private BoardComment(Board board, String content) {
-        this.board = board;
+    private BoardComment(NoticeBoard noticeBoard, UserAccount userAccount, String content) {
+        this.noticeBoard = noticeBoard;
+        this.userAccount = userAccount;
         this.content = content;
     }
 
-    public static BoardComment of(Board board, String content){
-        return new BoardComment(board, content);
+    public static BoardComment of(NoticeBoard noticeBoard, UserAccount userAccount, String content){
+        return new BoardComment(noticeBoard, userAccount, content);
     }
 
     @Override

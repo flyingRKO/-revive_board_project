@@ -8,7 +8,7 @@
 </head>
 <th:block layout:fragment="content">
     <div>공지공지</div>
-    <form th:action="@{/board/noticeBoardFormProcess}" method="post">
+    <form th:action="@{/noticeBoard/noticeBoardFormProcess}" method="post">
         <input type="hidden" name="id" id="id"/>
 
         <div class="mb-3">
@@ -24,7 +24,7 @@
                       id="content"
                       rows="3"></textarea>
         </div>
-        <button type="button" class="btn btn-primary" onclick="location.href='/board/noticeBoardList'" >취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/noticeBoard/noticeBoardList'" >취소</button>
         <button type="submit" class="btn btn-primary">등록하기</button>
         <div><br></div>
     </form>

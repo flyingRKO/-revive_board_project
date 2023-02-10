@@ -1,9 +1,9 @@
 package com.example.communityforum.repository;
 
-import com.example.communityforum.domain.Board;
+import com.example.communityforum.domain.NoticeBoard;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface NoticeBoardRepository extends JpaRepository<Board, Long>{
+public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long>{
 
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/board-layout}" lang="en">
+      layout:decorate="~{layouts/noticeBoard-layout}" lang="en">
 <th:block layout:fragment="content">
     <table class="table">
         <thead>
@@ -13,21 +13,22 @@
         </tr>
         </thead>
         <tbody>
-        <!-- 게시물 목록을 반복 -->
-        <tr th:each="board : ${boardList}">
-            <th scope="row">[[${board.id}]]</th>
-            <td><a th:href="@{/board/noticeBoardDetail/{id}(id=${board.id})}">
-                [[${board.title}]] </a>
-            </td>
-            <td >홍길동</td><!--TODO 유저 테이블에서 글쓴이 받아와서 넣어야됨-->
 
-            <td>[[${board.registeredDate}]]</td>
+        <tr th:each="noticeBoard : ${boardList}">
+            <th scope="row">[[${noticeBoard.id}]]</th>
+            <td><a th:href="@{/noticeBoard/noticeBoardDetail/{id}(id=${noticeBoard.id})}">
+                [[${noticeBoard.title}]] </a>
+            </td>
+            <td >글쓴이</td><!--TODO 유저 테이블에서 글쓴이 받아와서 넣어야됨-->
+
+            <td>[[${noticeBoard.registeredDate}]]</td>
         </tr>
         </tbody>
     </table>
     <div>
-        <button type="button" class="btn btn-primary" onclick="location.href='/board/noticeBoardForm'">등록하기</button>
-
+        <button type="button" class="btn btn-primary"
+                onclick="location.href='/noticeBoard/noticeBoardForm'">등록하기
+        </button>
     </div>
 
     <br>
