@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/board-layout}" lang="en">
+<th:block layout:fragment="content">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">번호</th>
+            <th scope="col">제목</th>
+            <th scope="col">글쓴이</th>
+            <th scope="col">등록일자</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="board : ${boardList}">
+            <th scope="row">[[${board.id}]]</th>
+            <td><a th:href="@{/board/noticeBoardDetail/{id}(id=${board.id})}">
+                [[${board.title}]] </a>
+            </td>
+            <td >글쓴이</td><!--TODO 유저 테이블에서 글쓴이 받아와서 넣어야됨-->
+
+            <td>[[${board.registeredDate}]]</td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="button" class="btn btn-primary"
+                onclick="location.href='/board/noticeBoardForm'">등록하기
+        </button>
+    </div>
+
+    <br>
+
+</th:block>
+</html>
