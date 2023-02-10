@@ -1,10 +1,14 @@
 package com.example.communityforum.controller;
 
 import com.example.communityforum.domain.Board;
+import com.example.communityforum.domain.Member;
+import com.example.communityforum.domain.MemberCustom;
 import com.example.communityforum.domain.constants.BoardType;
+import com.example.communityforum.repository.MemberRepository;
 import com.example.communityforum.service.NoticeBoardService;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,28 +20,22 @@ import org.springframework.web.bind.annotation.*;
 //@RequestMapping("/boards")
 public class NoticeBoardController {
     private final NoticeBoardService boardService;
-
+    private final MemberRepository memberRepository;
     @GetMapping("/board/noticeBoardForm")
     public String noticeBoardWriteForm() {
 
-        return "board/noticeBoardForm";
+        return "boards/noticeBoardForm";
     }
 
     @PostMapping("/board/noticeBoardFormProcess")
     public String insertNoticeBoard(Board board) {//save는 id가 있으면 update,id가 없으면 insert
-        System.out.println("@@@ insertNoticeBoard 에서 board 호출 : " + board);
-//        if (board.getId()!=null) {
-//            String title = board.getTitle();
-//            String content = board.getContent();
-//            board = boardService.findById(board.getId());
-//            board.setTitle(title);
-//            board.setContent(content);
-//        }
-//        boardService.saveBoard(boardRequest.toDto(UserAccountDto.of(
-//                "aaa", "111111", "이진혁", "01011114444", Role.GENERAL, true)));
+        Object principal            = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        MemberCustom memberCustom   = (MemberCustom)principal;
+        Member member               = memberRepository.findByMemberId(memberCustom.getUsername()).get();
+
+        board.setMember(member);
         board.setBoardType(BoardType.valueOf("NOTICE"));
         boardService.boardWrite(board);
-
 
         return "redirect:noticeBoardList";
     }
@@ -46,7 +44,7 @@ public class NoticeBoardController {
     @GetMapping("/board/noticeBoardList")
     public String noticeBoardList(Model model) {
         model.addAttribute("boardList", boardService.findAll());
-        return "/board/noticeBoardList";
+        return "/boards/noticeBoardList";
     }
 
 
@@ -56,13 +54,13 @@ public class NoticeBoardController {
 //        map.addAttribute("board", board);
 //        map.addAttribute("boardComments", board.getBoardCommentResponses());
         model.addAttribute("board", boardService.findById(id));
-        return "/board/noticeBoardDetail";
+        return "/boards/noticeBoardDetail";
     }
 
     @GetMapping("/board/noticeBoardDelete/{id}")
     public String deleteById(@PathVariable Long id) {
         boardService.deleteById(id);
-        return "redirect:/board/noticeBoardList";
+        return "redirect:/boards/noticeBoardList";
     }
 
 //    @PostMapping("/{boardId}/form")
@@ -80,7 +78,7 @@ public class NoticeBoardController {
     @GetMapping("/board/noticeBoardFormEdit/{id}")
     public String updateNoticeBoard(@PathVariable Long id, Model model) {
         model.addAttribute("board", boardService.findById(id));
-        return "board/noticeBoardFormEdit";
+        return "boards/noticeBoardFormEdit";
     }
 
 //    @GetMapping("/board/noticeBoardDetail/{id}")

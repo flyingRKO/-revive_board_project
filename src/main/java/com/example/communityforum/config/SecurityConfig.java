@@ -31,11 +31,11 @@ public class SecurityConfig {
                         .mvcMatchers(
                                 HttpMethod.GET,
                                 "/",
-                                "/notice",
                                 "/boards/**",
                                 "/faq",
                                 "/member/**",
-                                "/board/noticeBoardList"
+                                "/board/noticeBoardList",
+                                "/board/noticeBoardDetail/**"
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
