@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -35,8 +36,14 @@ public class Board {
     @Enumerated(EnumType.STRING)
     private BoardType boardType; // 구분
 
-    @Setter @Column(nullable = false, length = 50) private String title; // 제목
-    @Setter @Column(nullable = false, length = 500) private String content;  // 본문
+    @Setter
+    @Column(nullable = false, length = 50)
+    @Size(min = 2, max = 50, message = "제목을 2~50자 사이로 입력해주세요.")
+    private String title; // 제목
+    @Setter
+    @Column(nullable = false, length = 500)
+    @Size(min = 10, max = 500, message = "본문을 10~500자 사이로 입력해주세요.")
+    private String content;  // 본문
 
 
     @OrderBy("registeredDate desc")

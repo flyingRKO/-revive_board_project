@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -40,10 +41,9 @@ public class BoardController {
                 pageable.getPageNumber(),
                 boards.getTotalPages()
         );
-        map.addAttribute("boards", boardService.searchBoards(searchType, searchValue, pageable).map(BoardResponse::from));
         map.addAttribute("boards", boards);
         map.addAttribute("paginationBarNumbers", barNumbers);
-        map.addAttribute("totalCount", boardService.getBoardCount());
+        map.addAttribute("searchTypes", SearchType.values());
 
         return "boards/index";
     }
@@ -68,7 +68,7 @@ public class BoardController {
     @PostMapping("/form")
     public String postNewBoard(
             @AuthenticationPrincipal MemberCustom memberCustom,
-            BoardRequest boardRequest
+            @Valid BoardRequest boardRequest
     ) {
 
         boardService.saveBoard(boardRequest.toDto(memberCustom.toDto()));

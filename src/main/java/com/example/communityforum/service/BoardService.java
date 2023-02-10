@@ -42,12 +42,9 @@ public class BoardService {
             case ID:
                 dtos = boardRepository.findByMember_MemberIdContaining(searchKeyword,pageable).map(BoardDto::from);
                 break;
-            case USER_NAME:
-                dtos = boardRepository.findByMember_NameContaining(searchKeyword,pageable).map(BoardDto::from);
-                break;
-        }
+         }
 
-        return dtos;
+            return dtos;
         }
 
 

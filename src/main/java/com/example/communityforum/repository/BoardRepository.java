@@ -21,7 +21,6 @@ public interface BoardRepository extends
     Page<Board> findByTitleContaining(String title, Pageable pageable);
     Page<Board> findByContentContaining(String content, Pageable pageable);
     Page<Board> findByMember_MemberIdContaining(String memberId, Pageable pageable);
-    Page<Board> findByMember_NameContaining(String name, Pageable pageable);
 
     void deleteByIdAndMember_MemberId(Long boardCommentId, String memberId);
 
