@@ -27,21 +27,21 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional(readOnly = true)
-    public Page<BoardDto> searchBoards(SearchType searchType, String searchKeyword, Pageable pageable){
+    public Page<BoardDto> searchBoards(BoardType boardType, SearchType searchType, String searchKeyword, Pageable pageable){
         Page<BoardDto> dtos = null;
-        if (searchKeyword == null || searchKeyword.isBlank()){
-             dtos = boardRepository.findAll(pageable).map(BoardDto::from);
-            return boardRepository.findAll(pageable).map(BoardDto::from);
+        if (searchKeyword == null || searchKeyword.isBlank()) {
+            dtos = boardRepository.findByBoardType(boardType, pageable).map(BoardDto::from);
+            return dtos;
         }
         switch(searchType){
             case TITLE:
-                dtos = boardRepository.findByTitleContaining(searchKeyword,pageable).map(BoardDto::from);
+                dtos = boardRepository.findByBoardTypeAndTitleContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
                 break;
             case CONTENT:
-                dtos = boardRepository.findByContentContaining(searchKeyword,pageable).map(BoardDto::from);
+                dtos = boardRepository.findByBoardTypeAndContentContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
                 break;
             case ID:
-                dtos = boardRepository.findByMember_MemberIdContaining(searchKeyword,pageable).map(BoardDto::from);
+                dtos = boardRepository.findByBoardTypeAndMember_MemberIdContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
                 break;
          }
 

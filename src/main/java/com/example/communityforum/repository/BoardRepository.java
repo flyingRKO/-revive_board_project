@@ -2,6 +2,7 @@ package com.example.communityforum.repository;
 
 import com.example.communityforum.domain.Board;
 import com.example.communityforum.domain.QBoard;
+import com.example.communityforum.domain.constants.BoardType;
 import com.querydsl.core.types.dsl.DateTimeExpression;
 import com.querydsl.core.types.dsl.StringExpression;
 import org.springframework.data.domain.Page;
@@ -18,9 +19,11 @@ public interface BoardRepository extends
         QuerydslPredicateExecutor<Board>,
         QuerydslBinderCustomizer<QBoard> {
 
-    Page<Board> findByTitleContaining(String title, Pageable pageable);
-    Page<Board> findByContentContaining(String content, Pageable pageable);
-    Page<Board> findByMember_MemberIdContaining(String memberId, Pageable pageable);
+    Page<Board> findByBoardTypeAndTitleContaining(BoardType boardType, String title, Pageable pageable);
+    Page<Board> findByBoardTypeAndContentContaining(BoardType boardType, String content, Pageable pageable);
+    Page<Board> findByBoardTypeAndMember_MemberIdContaining(BoardType boardType, String memberId, Pageable pageable);
+
+    Page<Board> findByBoardType(BoardType boardType, Pageable pageable);
 
     void deleteByIdAndMember_MemberId(Long boardCommentId, String memberId);
 

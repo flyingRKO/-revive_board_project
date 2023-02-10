@@ -1,6 +1,7 @@
 package com.example.communityforum.controller;
 
 import com.example.communityforum.domain.MemberCustom;
+import com.example.communityforum.domain.constants.BoardType;
 import com.example.communityforum.domain.constants.FormStatus;
 import com.example.communityforum.domain.constants.SearchType;
 import com.example.communityforum.dto.request.BoardRequest;
@@ -36,7 +37,7 @@ public class BoardController {
             @PageableDefault(size = 20, sort = "registeredDate", direction = Sort.Direction.DESC) Pageable pageable,
             ModelMap map) {
 
-        Page<BoardResponse> boards = boardService.searchBoards(searchType, searchValue, pageable).map(BoardResponse::from);
+        Page<BoardResponse> boards = boardService.searchBoards(BoardType.FORUM, searchType, searchValue, pageable).map(BoardResponse::from);
         List<Integer> barNumbers = paginationService.getPaginationBarNumbers(
                 pageable.getPageNumber(),
                 boards.getTotalPages()
