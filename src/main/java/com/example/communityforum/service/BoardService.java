@@ -2,6 +2,7 @@ package com.example.communityforum.service;
 
 import com.example.communityforum.domain.Board;
 import com.example.communityforum.domain.Member;
+import com.example.communityforum.domain.constants.BoardType;
 import com.example.communityforum.domain.constants.SearchType;
 import com.example.communityforum.dto.BoardDto;
 import com.example.communityforum.dto.BoardWithCommentsDto;
@@ -68,7 +69,9 @@ public class BoardService {
 
     public void saveBoard(BoardDto dto) {
         Member member = memberRepository.getReferenceById(dto.getMemberDto().getMemberId());
-        boardRepository.save(dto.toEntity(member));
+        if (dto.getBoardType().equals(BoardType.FORUM)) {
+            boardRepository.save(dto.toForumEntity(member));
+        }
     }
 
     public void updateBoard(Long boardId, BoardDto dto){

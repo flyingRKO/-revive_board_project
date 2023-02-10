@@ -40,7 +40,7 @@ public class BoardDto {
     }
 
     public static BoardDto of(MemberDto memberDto, String title, String content){
-        return new BoardDto(null, memberDto, null, title,content,null,null);
+        return new BoardDto(null, memberDto, BoardType.FORUM, title,content,null,null);
     }
 
     public static BoardDto from(Board entity) {
@@ -55,10 +55,19 @@ public class BoardDto {
         );
     }
 
-    public Board toEntity(Member member) {
+    public Board toForumEntity(Member member) {
         return Board.of(
                 member,
                 BoardType.FORUM,
+                title,
+                content
+        );
+    }
+
+    public Board toNoticeEntity(Member member) {
+        return Board.of(
+                member,
+                BoardType.NOTICE,
                 title,
                 content
         );
