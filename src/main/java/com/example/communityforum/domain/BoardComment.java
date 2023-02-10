@@ -23,7 +23,7 @@ public class BoardComment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false) private NoticeBoard noticeBoard; // 게시글 (ID)
+    @Setter @ManyToOne(optional = false) private Board board; // 게시글 (ID)
     @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId")
     private UserAccount userAccount; // 유저 정보
     @Setter @Column(nullable = false, length = 50) private String content; // 본문
@@ -31,14 +31,14 @@ public class BoardComment {
 
     protected BoardComment() {}
 
-    private BoardComment(NoticeBoard noticeBoard, UserAccount userAccount, String content) {
-        this.noticeBoard = noticeBoard;
+    private BoardComment(Board board, UserAccount userAccount, String content) {
+        this.board = board;
         this.userAccount = userAccount;
         this.content = content;
     }
 
-    public static BoardComment of(NoticeBoard noticeBoard, UserAccount userAccount, String content){
-        return new BoardComment(noticeBoard, userAccount, content);
+    public static BoardComment of(Board board, UserAccount userAccount, String content){
+        return new BoardComment(board, userAccount, content);
     }
 
     @Override

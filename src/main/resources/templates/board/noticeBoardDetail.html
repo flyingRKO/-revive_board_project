@@ -4,19 +4,19 @@
       layout:decorate="~{layouts/default-layout}">
 <th:block layout:fragment="content">
     <div class="card text-center">
-        <!--       <div><p>[[${noticeBoard.id}]]</p></div> -->
-        <div><h5>[[${noticeBoard.title}]]</h5></div>
+        <!--       <div><p>[[${board.id}]]</p></div> -->
+        <div><h5>[[${board.title}]]</h5></div>
         <div>
-            <p>haribo [[${noticeBoard.registeredDate}]]</p>
+            <p>haribo [[${board.registeredDate}]]</p>
         </div>
 
         <div>
-            <p>[[${noticeBoard.content}]]</p>
+            <p>[[${board.content}]]</p>
         </div>
 
 
         <th:block layout:fragment="comment">
-            <form th:action="@{/noticeBoard/noticeBoardDetail/{id}(id=${noticeBoard.id})}" method="post">
+            <form th:action="@{/board/noticeBoardDetail/{id}(id=${board.id})}" method="post">
                 <input type="hidden" name="id" id="id"/>
 
                 <div class="mb-3">
@@ -36,14 +36,14 @@
 
     </div>
     <div class="mt-2">
-        <button type="button" class="btn btn-primary" onclick="location.href='/noticeBoard/noticeBoardList'">목록</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/board/noticeBoardList'">목록</button>
 
         <button type="button"
-                th:onclick="|location.href='@{/noticeBoard/noticeBoardFormEdit/{id}(id=${noticeBoard.id})}'|"
+                th:onclick="|location.href='@{/board/noticeBoardFormEdit/{id}(id=${board.id})}'|"
                 class="btn btn-secondary">수정
         </button>
 
-        <button type="button" th:onclick="|location.href='@{/noticeBoard/noticeBoardDelete/{id}(id=${noticeBoard.id})}'|"
+        <button type="button" th:onclick="|location.href='@{/board/noticeBoardDelete/{id}(id=${board.id})}'|"
                 class="btn  btn-danger">삭제
         </button>
 

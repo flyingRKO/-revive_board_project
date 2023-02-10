@@ -1,6 +1,6 @@
 package com.example.communityforum.service;
 
-import com.example.communityforum.domain.NoticeBoard;
+import com.example.communityforum.domain.Board;
 import com.example.communityforum.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,20 +14,20 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
 
-    public void boardWrite(NoticeBoard noticeBoard) {
-       boardRepository.save(noticeBoard);
+    public void boardWrite(Board board) {
+       boardRepository.save(board);
     }
 
-    public List<NoticeBoard> findAll() {
+    public List<Board> findAll() {
         return boardRepository.findAll();
     }
 
-    public NoticeBoard findById(Long id) {
+    public Board findById(Long id) {
         return boardRepository.findById(id).orElse(null);
     }
 
-    public NoticeBoard save(NoticeBoard noticeBoard) {
-        return boardRepository.save(noticeBoard);
+    public Board save(Board board) {
+        return boardRepository.save(board);
     }//안씀
 
     public void deleteById(Long id) {

@@ -1,6 +1,6 @@
 package com.example.communityforum.controller;
 
-import com.example.communityforum.domain.NoticeBoard;
+import com.example.communityforum.domain.Board;
 import com.example.communityforum.domain.constant.BoardType;
 import com.example.communityforum.service.BoardService;
 import lombok.Builder;
@@ -24,8 +24,8 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/board/noticeBoardFormProcess")
-    public String insertNoticeBoard(NoticeBoard noticeBoard) {//save는 id가 있으면 update,id가 없으면 insert
-        System.out.println("@@@ insertNoticeBoard 에서 board 호출 : " + noticeBoard);
+    public String insertNoticeBoard(Board board) {//save는 id가 있으면 update,id가 없으면 insert
+        System.out.println("@@@ insertNoticeBoard 에서 board 호출 : " + board);
 //        if (board.getId()!=null) {
 //            String title = board.getTitle();
 //            String content = board.getContent();
@@ -35,8 +35,8 @@ public class NoticeBoardController {
 //        }
 //        boardService.saveBoard(boardRequest.toDto(UserAccountDto.of(
 //                "aaa", "111111", "이진혁", "01011114444", Role.GENERAL, true)));
-        noticeBoard.setBoardType(BoardType.valueOf("NOTICE"));
-        boardService.boardWrite(noticeBoard);
+        board.setBoardType(BoardType.valueOf("NOTICE"));
+        boardService.boardWrite(board);
 
 
         return "redirect:noticeBoardList";

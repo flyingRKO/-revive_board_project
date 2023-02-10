@@ -19,7 +19,7 @@ import java.util.Set;
 @Table
 @EntityListeners(AuditingEntityListener.class)
 @Entity
-public class NoticeBoard {
+public class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,24 +50,24 @@ public class NoticeBoard {
     private LocalDateTime modifiedDate; // 수정일시
 
 
-    protected NoticeBoard() {}
+    protected Board() {}
 
-    private NoticeBoard(BoardType boardType, String title, String content) {
+    private Board(BoardType boardType, String title, String content) {
         this.boardType = boardType;
         this.title = title;
         this.content = content;
     }
 
-    public static NoticeBoard of(BoardType boardType, String title, String content) {
-        return new NoticeBoard(boardType, title, content);
+    public static Board of(BoardType boardType, String title, String content) {
+        return new Board(boardType, title, content);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof NoticeBoard)) return false;
-        NoticeBoard noticeBoard = (NoticeBoard) o;
-        return id != null && id.equals(noticeBoard.id);
+        if (!(o instanceof Board)) return false;
+        Board board = (Board) o;
+        return id != null && id.equals(board.id);
     }
 
     @Override
