@@ -1,7 +1,6 @@
 package com.example.communityforum.controller;
 
 import com.example.communityforum.domain.MemberCustom;
-import com.example.communityforum.dto.MemberDto;
 import com.example.communityforum.dto.request.BoardCommentRequest;
 import com.example.communityforum.service.BoardCommentService;
 import lombok.RequiredArgsConstructor;

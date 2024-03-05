@@ -1,10 +1,8 @@
 package com.example.communityforum.domain;
 
 import com.example.communityforum.domain.constants.FaqType;
-import com.example.communityforum.domain.constants.MemberRole;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;

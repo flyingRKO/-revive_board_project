@@ -4,7 +4,6 @@ import com.example.communityforum.domain.constants.MemberRole;
 import com.example.communityforum.dto.MemberDto;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
