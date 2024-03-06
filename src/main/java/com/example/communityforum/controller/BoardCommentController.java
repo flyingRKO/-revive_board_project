@@ -26,7 +26,7 @@ public class BoardCommentController {
     ){
         boardCommentService.saveBoardComment(boardCommentRequest.toDto(memberCustom.toDto()));
 
-        return "redirect:/boards/" + boardCommentRequest.getBoardId();
+        return "redirect:/boards/" + boardCommentRequest.boardId();
     }
 
     @PostMapping("/{commentId}/delete")

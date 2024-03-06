@@ -25,9 +25,9 @@ public class BoardCommentService {
 
     public void saveBoardComment(BoardCommentDto dto) {
         try{
-            Board board = boardRepository.getReferenceById(dto.getBoardId());
+            Board board = boardRepository.getReferenceById(dto.boardId());
 
-            Member member = memberRepository.getReferenceById(dto.getMemberDto().getMemberId());
+            Member member = memberRepository.getReferenceById(dto.memberDto().memberId());
 
             boardCommentRepository.save(dto.toEntity(board, member));
         } catch (EntityNotFoundException e){
@@ -37,9 +37,9 @@ public class BoardCommentService {
 
     public void updateBoardComment(BoardCommentDto dto) {
         try{
-            BoardComment boardComment = boardCommentRepository.getReferenceById(dto.getId());
-            if (dto.getContent() != null) {
-                boardComment.setContent(dto.getContent());
+            BoardComment boardComment = boardCommentRepository.getReferenceById(dto.id());
+            if (dto.content() != null) {
+                boardComment.setContent(dto.content());
             }
         } catch (EntityNotFoundException e){
             log.warn("댓글 업데이트 실패. 댓글을 찾을 수 없습니다 - dto: {}", dto);
