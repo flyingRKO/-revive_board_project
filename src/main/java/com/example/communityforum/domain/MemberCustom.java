@@ -40,9 +40,9 @@ public class MemberCustom extends User {
 
     public static MemberCustom from(MemberDto dto){
         return MemberCustom.of(
-                dto.getMemberId(),
-                dto.getMemberPassword(),
-                dto.getName()
+                dto.memberId(),
+                dto.memberPassword(),
+                dto.name()
         );
     }
 

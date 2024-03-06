@@ -53,7 +53,7 @@ public class BoardController {
     public String board(@PathVariable Long boardId, ModelMap map){
         BoardWithCommentResponse board = BoardWithCommentResponse.from(boardService.getBoardWithComments(boardId));
         map.addAttribute("board", board);
-        map.addAttribute("boardComments", board.getBoardCommentResponses());
+        map.addAttribute("boardComments", board.boardCommentResponses());
 
         return "boards/detail";
 

@@ -28,24 +28,15 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public Page<BoardDto> searchBoards(BoardType boardType, SearchType searchType, String searchKeyword, Pageable pageable){
-        Page<BoardDto> dtos = null;
         if (searchKeyword == null || searchKeyword.isBlank()) {
-            dtos = boardRepository.findByBoardType(boardType, pageable).map(BoardDto::from);
-            return dtos;
+            return boardRepository.findByBoardType(boardType, pageable).map(BoardDto::from);
         }
-        switch(searchType){
-            case TITLE:
-                dtos = boardRepository.findByBoardTypeAndTitleContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
-                break;
-            case CONTENT:
-                dtos = boardRepository.findByBoardTypeAndContentContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
-                break;
-            case ID:
-                dtos = boardRepository.findByBoardTypeAndMember_MemberIdContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
-                break;
-         }
+        return switch(searchType){
+            case TITLE -> boardRepository.findByBoardTypeAndTitleContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
+            case CONTENT -> boardRepository.findByBoardTypeAndContentContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
+            case ID ->boardRepository.findByBoardTypeAndMember_MemberIdContaining(boardType, searchKeyword,pageable).map(BoardDto::from);
+         };
 
-            return dtos;
         }
 
 
@@ -68,8 +59,8 @@ public class BoardService {
 
 
     public void saveBoard(BoardDto dto) {
-        Member member = memberRepository.getReferenceById(dto.getMemberDto().getMemberId());
-        if (dto.getBoardType().equals(BoardType.FORUM)) {
+        Member member = memberRepository.getReferenceById(dto.memberDto().memberId());
+        if (dto.boardType().equals(BoardType.FORUM)) {
             boardRepository.save(dto.toForumEntity(member));
         }
     }
@@ -78,11 +69,11 @@ public class BoardService {
         try {
             Board board = boardRepository.getReferenceById(boardId);
 
-            Member member = memberRepository.getReferenceById(dto.getMemberDto().getMemberId());
+            Member member = memberRepository.getReferenceById(dto.memberDto().memberId());
 
             if (board.getMember().equals(member)){
-                if (dto.getTitle() != null) { board.setTitle(dto.getTitle());}
-                if (dto.getContent() != null) { board.setContent(dto.getContent());}
+                if (dto.title() != null) { board.setTitle(dto.title());}
+                if (dto.content() != null) { board.setContent(dto.content());}
             }
         } catch (EntityNotFoundException e) {
             log.warn("게시글 업데이트 실패. 수정에 필요한 정보를 찾을 수 없습니다 - {}", e.getLocalizedMessage());

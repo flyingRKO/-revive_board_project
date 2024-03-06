@@ -3,30 +3,18 @@ package com.example.communityforum.dto;
 import com.example.communityforum.domain.Board;
 import com.example.communityforum.domain.Member;
 import com.example.communityforum.domain.constants.BoardType;
-import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Getter
-public class BoardDto {
-    private final Long id;
-    private final MemberDto memberDto;
-    private final BoardType boardType;
-    private final String title;
-    private final String content;
-    private final LocalDateTime registeredDate;
-    private final LocalDateTime modifiedDate;
-
-    private BoardDto(Long id, MemberDto memberDto, BoardType boardType, String title, String content, LocalDateTime registeredDate, LocalDateTime modifiedDate) {
-        this.id = id;
-        this.memberDto = memberDto;
-        this.boardType = boardType;
-        this.title = title;
-        this.content = content;
-        this.registeredDate = registeredDate;
-        this.modifiedDate = modifiedDate;
-    }
-
+public record BoardDto(
+        Long id,
+        MemberDto memberDto,
+        BoardType boardType,
+        String title,
+        String content,
+        LocalDateTime registeredDate,
+        LocalDateTime modifiedDate
+) {
 
     public static BoardDto of(Long id,
                               MemberDto memberDto,

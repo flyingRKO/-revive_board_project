@@ -15,7 +15,7 @@ public class PaginationService {
         int startNumber = Math.max(currentNumber - (BAR_LENGTH / 2), 0);
         int endNumber = Math.min(startNumber + BAR_LENGTH, totalPages);
 
-        return IntStream.range(startNumber, endNumber).boxed().collect(Collectors.toUnmodifiableList());
+        return IntStream.range(startNumber, endNumber).boxed().toList();
     }
 
     public int currentLength() {
