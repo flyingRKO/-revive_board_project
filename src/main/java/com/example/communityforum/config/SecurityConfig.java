@@ -26,15 +26,13 @@ public class SecurityConfig {
                                 HttpMethod.GET,
                                 "/",
                                 "/boards/**",
-                                "/faq",
                                 "/member/**",
                                 "/board/noticeBoardList",
                                 "/board/noticeBoardDetail/**"
                         ).permitAll()
                         .mvcMatchers(
                                 HttpMethod.POST,
-                                "/member/**",
-                                "/faq"
+                                "/member/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
